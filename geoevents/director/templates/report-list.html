@@ -1,0 +1,38 @@
+ {% extends "./base.html" %}
+ {% load markup %}
+ {% load url from future %}
+
+ {%block javascript%}
+<script type="text/javascript">
+	function init(){
+	$('.service_type').tooltip();
+}</script>
+ {%endblock%}
+ 
+ {%block main-content%}
+  <div class="page-header"><h1>{{reports_list|length}} Report{{reports_list|pluralize}}</h1></div>
+  <a href="{% url 'reports-manage-report' %}" class="btn btn-mini btn-success"><i class="icon-plus icon-white"></i> Add New Report</a><br/><br/>
+              <table class="table table-hover">
+              <tbody>
+			  <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Date Added</th>
+                  <th>Content</th>
+                  <th></th>
+                </tr>
+              </thead>
+              {% for report in reports_list%}
+                <tr>
+                   <td><a href="{{report.get_absolute_url}}">{{report.title}}</a></td>
+				   <td>{{report.created}}</td>
+					<td>{{report.details|truncatechars:70|markdown}}</td>
+					<td><a href="{% url 'reports-manage-report-id' report.id %}" class="btn btn-small btn-primary"><i class="icon-pencil icon-white"></i> Edit</a>  <a href="{% url 'reports-delete-report-id' report.id %}" class="btn btn-small btn-danger"><i class="icon-trash icon-white"></i> Delete</a></td>
+                </tr>
+               {%endfor%} 
+              </tbody>
+      </table>
+ 
+{% include "generic_paginator.html" %}
+ 
+ {%endblock%}

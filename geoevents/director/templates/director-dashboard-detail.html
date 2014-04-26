@@ -1,0 +1,136 @@
+{% extends "./base.html"%}
+
+{% block title %}: {{ item.name }}{% endblock %}
+
+{% load markup %}
+{% load url from future %}
+
+{% block css %}
+<link href="{{STATIC_URL}}css/incident.css" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/>
+<link href="{{STATIC_URL}}css/widgets.css" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/>
+<link href="{{STATIC_URL}}timeline/timeline.css" rel="stylesheet">
+<link href="{{STATIC_URL}}jquery-ui/cupertino/jquery-ui.min.css" rel="stylesheet"/>
+<link href="{{STATIC_URL}}fullcalendar/fullcalendar.css" rel="stylesheet">
+<link href="{{STATIC_URL}}fullcalendar/fullcalendar.print.css" rel="stylesheet">
+<link href="{{STATIC_URL}}datatables.net/css/demo_page.css" rel="stylesheet" />
+<link href="{{STATIC_URL}}datatables.net/css/demo_table.css" rel="stylesheet" />
+<link href="{{STATIC_URL}}datatables.net/css/dataTables.TableTools.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="{{STATIC_URL}}timeline/timeline.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}fullcalendar/fullcalendar.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.cookie.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.ba-bbq.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.event.drag-2.2.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.event.drop-2.2.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}datatables.net/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}datatables.net/js/dataTables.TableTools.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}datatables.net/js/dataTables.ZeroClipboard.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}js/dashboard-support.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/director-support.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/director-support.drawwidgets.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/director-support.plugins.timeline.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/director-support.plugins.tables.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/director-support.plugins.topprograms.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/director-support.plugins.links.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/director-support.plugins.calendar.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/director-support.plugins.livingwar.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/director-support.plugins.billet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/director-support.plugins.actions.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/settings-manager.js"></script>
+
+{% endblock %}
+{% block javascript_no_compress %}
+
+<script type="text/javascript">
+var settings = {};
+var dashboard = {};
+
+$(document).ready(function() {
+    director_support.init();
+
+    dashboard.id = {{ item.id }};
+    dashboard.org = '{{item.org}}';
+    dashboard.name = '{{item.name}}';
+    dashboard.owner = '{{item.owner}}';
+    dashboard.site_icon = '{{item.site_icon}}';
+    dashboard.status = '{{item.status}}';
+    dashboard.type = '{{item.type}}';
+    dashboard.tracking_code = '{{item.tracking_code}}';
+    dashboard.current_user = '{{request.user.username}}';
+
+    //Load list of page widgets and their configuration details
+    dashboard.dates = {{item.dashboard_dates_json|safe}};
+
+    dashboard.widgets = {{item.related_widget_list_json|safe}};
+    director_support.parseNotesAndJSON(dashboard.widgets);
+
+    //data is where widget-specific data will be kept
+    dashboard.data={};
+
+    //Timeline events will be populated by other widgets
+    dashboard.data.timeline_events = [];
+
+    event_pages.options.staticRoot = '{{STATIC_URL}}';
+    event_pages.options.root = '{% url "home" %}';
+    event_pages.options.csrf = "{% csrf_token %}";
+
+    settings = {{settings|safe}};
+    settings = event_pages.turnSettingsIntoObject(settings);
+
+    if (dashboard.tracking_code){
+        settings.owa_siteid = dashboard.tracking_code;
+    }
+
+    director_support.updateTitle(dashboard.org+" Executive Dashboard");
+
+    //TODO: Make this an auto-grabbing, auto-updating data source, possibly AngularJS?
+    dashboard.data.programs = {{item.related_programs_list_by_group_json|safe}};
+    dashboard.data.links = {{item.related_links_list_json|safe}};
+    dashboard.data.reports = {{item.reports_json|safe}};
+    dashboard.data.reports_user = {{user_reports|safe}};
+    dashboard.data.billets = {{item.billet_json|safe}};
+    dashboard.data.actions = {{item.get_action_items|safe}};
+
+    dashboard.permissions = {};
+    dashboard.permissions.add_notes = ("{{ perms.notes.add_note }}"=="True");
+    dashboard.permissions.edit_notes = ("{{ perms.notes.change_note }}"=="True");
+    dashboard.permissions.add_report = ("{{ perms.director.add_report }}"=="True");
+    dashboard.permissions.edit_report = ("{{ perms.director.change_report }}"=="True");
+    dashboard.permissions.add_billet = ("{{ perms.director.add_billet }}"=="True");
+    dashboard.permissions.edit_billet = ("{{ perms.director.change_billet }}"=="True");
+    dashboard.permissions.delete_billet = ("{{ perms.director.delete_billet }}"=="True");
+    dashboard.permissions.add_action = ("{{ perms.director.add_actions }}"=="True");
+    dashboard.permissions.edit_action = ("{{ perms.director.change_actions }}"=="True");
+
+
+    director_support.drawWidgets(dashboard);
+
+//    $(".main-content").css('width','1200px');
+});
+
+</script>
+{% endblock %}
+
+
+{% block main-content %}
+<!--Beginning of Left column-->
+<div class="span12">
+
+    <!--Header-->
+    <div class="row-fluid">
+        <div class="header">
+            <!--<div class="page-header"><h2>{{item.org}} : {{item.name}}</h2></div>-->
+            <div class="header-subtext">
+                <div class="main title nav-header">Created: {{ item.created }}</div>
+                <div class="sub-items"><span class="nav-header title">TAGS:</span>{% if item.tags_as_list %}{%for tag in item.tags_as_list%} <span class="label label-info">{{tag}}</span> {%endfor%} {%else%} No Tags {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- End of bottom column -->
+
+{% endblock %}

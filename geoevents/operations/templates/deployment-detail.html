@@ -1,0 +1,160 @@
+ {% extends "./base.html" %}
+ {% load url from future %}
+
+ {%block javascript%}
+ <script type="text/javascript" src="{{STATIC_URL}}js/incident-support.js"></script>
+ <script type="text/javascript" src="{{STATIC_URL}}js/layer-builder.js"></script>
+ <script type="text/javascript" src="{{STATIC_URL}}js/layer-handler.js"></script>
+ <script type="text/javascript" src="{{STATIC_URL}}js/layer-parsers.js"></script>
+ <script type="text/javascript">
+
+     $(document).ready(function() {
+     var map;
+     var nrlTileServer = "http://geoint.nrlssc.navy.mil/nrltileserver/wms?";
+
+     var incidentIcon = '{{STATIC_URL}}images/avalanche.png';
+     incident = new OpenLayers.LonLat({{item.longitude}},{{item.latitude}});
+     center = new OpenLayers.LonLat({{item.longitude}},{{item.latitude}});
+     map = new OpenLayers.Map( 'map_canvas' );
+
+     var incidentMarker = new OpenLayers.Layer.Markers( "Deployment Location" );
+     var size = new OpenLayers.Size(36,36);
+     var icon = new OpenLayers.Icon(incidentIcon,size);
+     incidentMarker.addMarker(new OpenLayers.Marker(incident,icon));
+
+     var mapServices = {{map.map_layers_json|safe}};
+     var mapLayerList = layerHandler.mapServiceJSONtoLayer(mapServices, [incidentMarker]);
+
+     map.addLayers(mapLayerList);
+     map.zoomToMaxExtent();
+     map.setCenter(center, 10);
+
+     function addMapLayersList(){
+         if (!map || !map.layers || !map.layers.length) {
+             setTimeout(addMapLayersList,1000);
+             return;
+         }
+
+         var list = $("#layers_list");
+         list.empty();
+         list.html("<h5>Map Layers:</h5>");
+         var $div = $('<div>')
+                 .addClass("btn-group")
+                 .addClass("btn-group-vertical")
+                 .attr('data-toggle',"buttons-checkbox");
+         $div.appendTo(list);
+
+         $(map.layers).each(function(){
+             var layer = $(this)[0];
+             var currentVis = layer.getVisibility();
+
+
+             var $a = $('<button>')
+                     .addClass('btn')
+                     .attr('title','If pink, then the sourcing server is temporarily offline')
+                     .text(layer.name)
+                     .attr('href','#')
+                     .bind("click", function(){
+                               if ($(this).hasClass('active')){
+                                   layer.setVisibility(false);
+                               }else{
+                                   layer.setVisibility(true);
+                               }
+                           });
+
+             if (currentVis){
+                 $a.addClass('active');
+             }
+
+             $a.appendTo($div);
+
+             $('.notes p:not([class])').addClass('description');
+
+
+         });
+     };
+
+     addMapLayersList();
+     });
+
+
+ </script>
+{% endblock %}
+
+ {%block main-content%}
+ {% load markup %}
+
+        <div class="span9">
+            <div class="header">
+            <div class="page-header"><h2>{{item|truncatechars:60}}</h2></div>
+            <div class="header-subtext">
+                <span class="main title nav-header">Created: {{ item.created }}</span>
+                <!--<span class="tags"><span class="nav-header title pull-right">In support of: {{ item.event }}</span></span>-->
+            </div>
+            </div>
+
+            <div class="thumbnail">
+                <div id="map_canvas" style="height:500px;"></div>
+            </div>
+
+            <div>
+                <h3 class="landing-page-header">Overview</h3>
+                <p>{{item.description|markdown}}</p>
+            </div>
+            <br/>
+            <div class="notes">
+                <h3 class="landing-page-header"><i class="icon icon-comment"></i>Latest Notes{% if perms.notes.add_note%}<span class="header-actions pull-right"><a class="btn btn-mini" href="{% url 'notes-manage-note-model-id' 'deployment' item.pk %}">Add New Note</a></span>{% endif %}</h3>
+                <div class="header-subtext">
+                    <ul class="header-subtext-actions"></ul>
+                </div>
+
+                {%if item.notes%}
+                    <ul class="notes-list">
+                        {% for note in item.notes|slice:":4" %}
+                            <li>
+                                <a href="{{note.get_absolute_url}}"><b>{{note.title|title}}</b></a>
+
+                                {{note.content|markdown}}
+                                <p class="user-post-text"><i class="muted">Posted {{note.last_updated|timesince}} ago by <b>{{note.owner}}</b>.</i></p>
+                                <div class="clearfix"></div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {%else%}
+                    <p>No notes have been submitted for this deployment.</p>
+                {%endif%}
+                <br>
+            </div>
+        </div>
+
+
+     <div class="span3">
+        <div class="row-fluid">
+         <h3 class="landing-page-header"><i class="icon icon-info-sign"></i>About  <span class="header-actions pull-right">{%if perms.operations.change_event%}
+             <div class="btn-group">
+                 <a class="btn  btn-mini" href="{% url 'operations-manage-deployment-pk' item.pk %}">Edit Deployment</a>
+                 <button class="btn btn dropdown-toggle btn-mini" data-toggle="dropdown">
+                     <span class="caret"></span>
+                 </button>
+                 <ul class="dropdown-menu">
+                     {%if perms.operations.delete_deployment%}<li><a href="{% url 'operations-delete-deployment-pk' item.pk %}">Delete Deployment</a></li>{% endif %}
+                 </ul>
+             </div>
+         {%endif%}</span></h3>
+         <div>
+             <b>Location: </b>{{item.deployment_location}}<br/>
+             <b>Date Created:</b> {{item.created}}<br/>
+             <b>Length of Deployment</b> {{ item.duration_in_days }} days<br/>
+             <b>Deployers: </b>{{item.deployer_names}}<br/>
+             <b>Event: </b> <a href="{{item.event.url}}">{{ item.event.name }}</a><br>
+         </div>
+        </div>
+      <br/>
+      
+
+      </div>
+ {%endblock%}
+
+ {%block lower-sidebar%}
+ <div id="layers_list"></div>
+{% endblock %}

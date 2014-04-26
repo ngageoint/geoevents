@@ -1,0 +1,21 @@
+ {% extends "./generic_form_page.html" %}
+ {% load url from future %}
+
+ {% block subheader %}
+     <div style='max-width:600px;'>
+     <p><strong>These resources will show up on Event pages as links.</strong></p>
+
+     <p>If this is a map layer that should be shown on the main map as an optional layer, please enter
+         the details below and then <a href="{% url 'add-feedback' %}">submit a feedback entry</a> to
+         request that our admins add this as a map layer.</p>
+
+     <p><strong>Any extra details that you can provide in the description (layer names, security tokens,
+         styles, queryable attributes) would be helpful.</strong></p>
+     <hr/></div>
+ {% endblock %}
+
+{% block extra_buttons %}
+    {% if object %}
+        <a href="{% url 'operations-delete-service-pk' object.id %}" class="btn btn-danger">Delete this {{ object_name }}</a>
+    {% endif %}
+{% endblock %}

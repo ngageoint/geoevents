@@ -1,0 +1,21 @@
+ {% extends "./base.html" %}
+ {% load tz %}
+ {% load url from future %}
+
+ {% block title %}: Events created on {{ day }}{% endblock %}
+ {%block main-content%}
+  
+  <ul class="breadcrumb">
+  <li><a href="{%url 'operations-view-incident-archive' %}">Archives</a><span class="divider">/</span></li>
+  <li><a href="{%url 'operations-view-incident-archive-year' day.year %}">{{day.year}}</a> <span class="divider">/</span></li>
+  <li><a href="{%url 'operations-view-incident-archive-month' day.year day|date:'m' %}">{{day|date:"F"}}</a> <span class="divider">/</span></li>
+  <li class="active">{{day|date:"dS"}}</li>
+  </ul>
+  
+  <div class="page-header"><h1>Events created on {{day}}</h1></div>
+  
+  {%include "incident-archive-incident-table.html"%}
+  
+ {% include "generic_paginator.html" %}
+ 
+ {%endblock%}

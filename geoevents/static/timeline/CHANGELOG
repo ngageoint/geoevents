@@ -1,0 +1,72 @@
+CHAP Links Library - Timeline
+
+
+2012-09-18, version 2.3.2
+
+- fixed mouseover/dragging of the vertical lines with current time and custom
+  time, which did only work in the axis area but not in the contents area.
+
+
+2012-09-13, version 2.3.1
+
+- added: double tap events on mobile devices will now fire the edit/new event.
+- fixed/updated example 09, 15, 17, and 18.
+- created example 21.
+
+
+2012-09-05, version 2.3.0
+
+- new: items can now have an individual class name which allows styling of
+  individual items. This gives a lot of extra flexibility.
+- fixed issue #26: pinching on Ipad did throw an error "ReferenceError: Can't
+  find variable: timeline".
+- fixed issue #28: in some cases, clicking an item would not select the item
+  but move the timeline slightly (less than 1px).
+
+
+2012-07-30, version 2.2.1
+
+- fixed the 'select' event not being fired when an item gets unselected.
+- fixed method changeItem not dealing with changing the type of the item
+  from box to range or vice versa.
+
+
+2012-07-27, version 2.2.0
+
+- added an option showMinorLabels. By setting both showMinorLabels and
+  showMajorLabels, true, the axis will not be visible.
+- fixed issue #6: items and axis did not move with the speed when moving
+  the Timeline under IE8 and older.
+- fixed issue #8: start, end, min, max not working correctly around Date(0).
+- fixed issue #9. It is now possible to specify only start or end in the
+  options, instead of having to specify both.
+- fixed issue #12: the group of an item was not restored after canceling a
+  change.
+
+
+2012-06-18, version 2.1.2
+
+- fixed issue #4 again: sorting groups still not working correctly
+
+
+2012-06-15, version 2.1.1
+
+- fixed issue #3: broken option stackEvents=false
+- fixed issue #4: sorting groups not working correctly
+
+
+2012-06-04, version 2.1
+
+- Documentation has a new layout
+- Source code cleaned up
+
+
+2012-05-02, version 2.0.1
+
+- bug fix: areas on the left and right end of a range (for changing start/end)
+  where displayed below the range instead of on top of it.
+
+
+2012-05-02, version 2.0
+
+- initial upload to github (formerly located at sourceforge)

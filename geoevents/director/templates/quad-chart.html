@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quad Chart</title>
+
+    <style>
+        body {font-family:'arial';margin:0; border:0;}
+        .quadHolder {width:100%; min-height:500px;}
+        .bordered {border:2px solid black;}
+        .leftColumn {width:50%; border:2px solid black; padding:6px; }
+        .rightColumn {width:50%; border:2px solid black; padding:6px; }
+        .topRow {vertical-align: bottom;}
+        .bottomRow {vertical-align: top;}
+        .header {font-size:22px;font-weight:bold;}
+        .headerSmall {font-size:16px;font-weight:bold;}
+        .rating_Green {background-color:green; border:1px solid black}
+        .rating_Yellow, .rating_ {background-color:yellow; border:1px solid black}
+        .rating_Red {background-color:red; border:1px solid black}
+        .pocHolder {min-width: 350px}
+        .bold {font-weight:bold}
+        .left {text-align:left;}
+        .right {text-align:right;}
+        .scaleIt {vertical-align:top;}
+        i.icon-large {width:28px;height:28px;background-size: 938px 318px;}
+        i.icon-circle-arrow-right {background-position:-480px -290px}
+        i.icon-circle-arrow-up {background-position:-576px -290px}
+        i.icon-circle-arrow-down {background-position:-624px -290px}
+
+    </style>
+    <link href="{{STATIC_URL}}bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <script type="text/javascript" src="{{STATIC_URL}}js/consolelog.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}jquery-ui/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/underscore-min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}bootstrap/js/bootstrap.js"></script>
+
+    <script>
+        var item = {{item.info_json|safe}};
+        $(document).ready(function(){
+
+            var ss = item.summary_schedule;
+            if (ss && ss.length) {
+                ss = ss.replace(/\n/g,'<br/>\n');
+                $("#summary_schedule").html(ss);
+            }
+
+            var rp = item.risk_performance;
+            if (rp && rp.length) {
+                rp = rp.replace(/\n/g,'<br/>\n');1
+                $("#risk_performance").html(rp);
+            }
+
+            var fc = item.funds_cost;
+            if (fc && fc.length) {
+                fc = fc.replace(/\n/g,'<br/>\n');
+                $("#funds_cost").html(fc);
+            }
+
+//            var ratings = ['overall','schedule','cost','performance'];
+            var $ratings = $('.rating');
+            $ratings.each(function(){
+                var $rating = $(this);
+                var rating = $rating.text();
+
+                var icon='right';
+                if (rating=='Up') icon="up";
+                if (rating=='Down') icon="down";
+
+                $rating.empty();
+                $('<i>')
+                    .addClass('icon-large icon icon-circle-arrow-'+icon)
+                    .appendTo($rating);
+
+            });
+
+
+
+            //TODO: Doesn't scale vertically on printview
+            var $scaleCell = $('.scaleIt');
+            var pht = parseInt($scaleCell.parent().closest('td').css('height')) - 25;
+            $scaleCell.css('height',pht);
+
+            var dashboard_reports = {{dashboard_reports|safe}};
+            if (dashboard_reports && dashboard_reports.length){
+                $(".warHolder")
+                        .css("display","block");
+
+                var $warList = $("#warList");
+                _.each(dashboard_reports,function(report){
+                    var text = "<b>"+report.title+"</b>: "+report.details+"<br/>";
+                    $("<div>")
+                            .html(text)
+                            .appendTo($warList);
+                });
+
+            };
+        });
+    </script>
+</head>
+<body>
+    <div style="width:100%; background-color: #55799e; text-align:center;">
+        <img src="{{STATIC_URL}}images/director/nga_header.png" />
+    </div>
+
+
+    <table style="width:100%;">
+        <tr><td style="width:20%;">
+            &nbsp;
+        </td><td style="width:50%;text-align:center;" class="header">
+            {{item.program.name}}
+        </td><td style="width:30%;" class="headerSmall right">
+            Entered: {{item.observation_entered}}
+        </td>
+    </table>
+
+
+    <table class="quadHolder">
+        <tr><td class="leftColumn bordered topRow">
+            <table style="width:100%">
+                <tr><td>
+<!-- Content Top Left-->
+<b>Program Description: </b> {{item.program.details}}<p/>
+<b>Program Manager Assessment: </b> {{item.pm_observation}}<p/>
+<b>Overall Summary: </b> {{item.summary_overall}}<p/>
+
+<table class="pocHolder">
+    <tr><td class="left">Government PM:</td><td class="right bold">{{item.program.government_pm}}</td></tr>
+    <tr><td class="left">COR:</td><td class="right bold">{{item.program.government_cor}}</td></tr>
+    <tr><td class="left">COTR:</td><td class="right bold">{{item.program.government_cotr}}</td></tr>
+    <tr><td class="left">Contractor:</td><td class="right bold">{{item.program.contractor}}</td></tr>
+    <tr><td class="left">Contract Type:</td><td class="right bold">{{item.program.contract_type}}</td></tr>
+    <tr><td class="left">Period of Performance:</td><td class="right bold">{{item.program.period_of_performance}}</td></tr>
+</table>
+
+                </td></tr>
+                <tr height="20"><td height="20" class="right">
+<!-- Rating Top Left -->
+<span class="header">OVERALL <span class="rating_{{item.metric_risk}} rating">{{item.trend_overall}}</span></span>
+                </td></tr>
+            </table>
+        </td><td class="rightColumn bordered topRow">
+            <table>
+                <tr><td class="scaleIt">
+<!-- Content Top Right-->
+<b>Accomplishments: </b><br/>
+<div id="summary_schedule">{{item.summary_schedule}}</div>
+                </td></tr>
+                <tr height="20"><td height="20">
+<!-- Rating Top Right -->
+<span class="header"><span class="rating_{{item.metric_schedule}} rating">{{item.trend_schedule}}</span> SCHEDULE</span>
+                </td></tr>
+            </table>
+        </td></tr>
+        <tr><td class="leftColumn bordered bottomRow">
+
+            <table style="width:100%">
+                <tr height="20"><td height="20" class="right">
+<!-- Rating Bottom Left -->
+<span class="header">COST <span class="rating_{{item.metric_cost}} rating">{{item.trend_cost}}</span></span>
+                </td></tr>
+                <tr height="100%"><td height="100%">
+<!-- Content Bottom Left-->
+
+<b>Cost Summary: </b> {{item.summary_cost}}<p/>
+
+<b>Budget: </b><br/>
+{{item.budget_cost}}<p/>
+<b>Execution Status: </b><br/>
+{{item.execution_cost}}<p/>
+<b>Funds: </b><br/>
+<span id="funds_cost">{{item.funds_cost}}</span>
+
+                </td></tr>
+            </table>
+
+
+        </td><td class="rightColumn bordered bottomRow">
+
+            <table style="width: 100%">
+                <tr height="20"><td height="20">
+<!-- Rating Bottom Right -->
+<span class="header"><span class="rating_{{item.metric_performance}} rating">{{item.trend_performance}}</span> PERFORMANCE</span>
+                </td></tr>
+                <tr height="100%"><td height="100%">
+<!-- Content Bottom Right-->
+<b>Issues: </b><br/>
+{{item.issues_performance}}<p/>
+<b>Risks: </b><br/>
+<span id="risk_performance">{{item.risk_performance}}</span><p/>
+<b>Summary: </b><br/>
+{{item.summary_performance}}<p/>
+
+                </td></tr>
+            </table>
+
+        </td></tr>
+    </table>
+
+
+    <table style="width:100%;">
+        <tr><td style="width:50%;text-align:center" class="bold">
+            Public Releasable
+            &nbsp;
+        </td><td style="width:50%;" class="right">
+            Program Information
+        </td>
+    </table>
+
+    <table class="warHolder" style="display:none;width:100%;">
+        <tr><td class="bordered">
+            <h2>Related Activity Reports</h2>
+        </td><tr>
+
+        <tr><td class="bordered" id="warList">&nbsp;</td><tr>
+    </table>
+
+
+
+</body>
+</html>

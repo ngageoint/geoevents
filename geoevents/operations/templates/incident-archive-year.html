@@ -1,0 +1,24 @@
+ {% extends "./base.html" %}
+ {% load tz %}
+ {% load url from future %}
+
+ {% block title %}: Events Created in {{ year }}{% endblock %}
+ {%block main-content%}
+  <ul class="breadcrumb">
+  <li><a href="{%url 'operations-view-incident-archive' %}">Archives</a><span class="divider">/</span></li>
+  <li class="active"><a href="{%url 'operations-view-incident-archive-year' year %}">{{year}}</a> <span class="divider">/</span></li>
+  </ul>
+  
+  <div class="page-header"><h1>Events by Year ({{year}})</h1></div>
+  
+  <div class="archive-years">
+    <ul class="nav nav-pills">
+    {%for d in date_list%}
+    <li><a href="{%url 'operations-view-incident-archive-month' d|utc|date:'Y' d|utc|date:'m'%}">{{d|utc|date:"F"}}</a></li>
+    {%endfor%}
+    </ul>
+  </div>
+              
+ {% include "generic_paginator.html" %}
+ 
+ {%endblock%}

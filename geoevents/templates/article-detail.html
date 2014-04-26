@@ -1,0 +1,13 @@
+ {% extends "./base.html" %}
+ {% load markup %}
+
+ {%block content%}
+  <div class="container-narrow main-content">
+  <br/>
+      <h4 class="page-header">{{ item.title }}</h4>
+      <div class="span8" style="margin-top:4px">{{ item.content|markdown }}
+          <br/>
+          {%if perms.feedback.change_article%}<a href="{{ item.get_edit_url }}" class="btn btn-mini btn-info">Edit FAQ</a>{% endif %}
+      </div>
+  </div>
+{%endblock%}

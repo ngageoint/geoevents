@@ -1,0 +1,102 @@
+
+{% extends "./base.html"%}
+
+{% block title %}: Active Events{% endblock %}
+
+{% block css %}
+<link href="{{STATIC_URL}}css/events-list-dashboard.css" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/>
+<link href="{{STATIC_URL}}timeline/timeline.css" rel="stylesheet">
+<style>
+    div.olControlAttribution {
+        bottom: 5px;
+        color: #f2cf31;
+        font-weight: bold;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="{{STATIC_URL}}timeline/timeline.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.cookie.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.ba-bbq.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/underscore-min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/underscore.string.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/moment.min.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}js/dashboard-support.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/layer-builder.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/layer-parsers.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/layer-handler.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/layer-buttons.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jsmaptools.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jsshapeviewer.js"></script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //TODO: Need a better way to manage layer css within IE
+        if ($ && $.browser && $.browser.msie){
+            $('.span12').css('margin-left','0px');
+            $('.span9').css('margin-left','0px');
+        }
+
+
+//all event variables used must also be declared in event-list-dashboard.html
+        var event = {};
+
+        event.fullScreenMap = true;
+        event.fullScreenLink = '{% url operations-view-full-dashboard %}';
+        event.normalScreenLink = '{% url active-incidents %}';
+        event.staticRoot = '{{STATIC_URL}}';
+        event.mapServices = {{map.map_layers_json|safe}};
+        event.map = {{ map.map_json|safe }};
+
+  //  event.id = 'dashboard';
+  //  event.closed = '{{ item.closed }}';
+
+    //event.lastUpdated = '{{ item.last_updated }}';
+    //event.eventType = '{{item.event_type}}';
+
+    //event.link = '{{ item.link }}';
+    //event.allowClicksForInfo = (document.location.hostname!='localhost');
+    //   event.longitude = {{item.longitude}};
+    //event.latitude = {{item.latitude}};
+
+
+    if (document.location.hostname=='localhost'){
+        //NOTE: Uses test RFI and SMTS feed for local testing
+        event.rfiFeed = '/static/test_list_rfis.json';
+        event.productFeed = '/static/test_list_smts.xml'
+    }
+
+    dashboard_support.init(event);
+
+    });
+
+</script>
+{% endblock %}
+
+
+
+
+{% block main-content %}
+<!-- The main column is the width of the window in this view-->
+<div class="span12" style="padding-top: 65px">
+
+    <!--Map-->
+    <div class="row-fluid">
+        <div class="thumbnail">
+            <div id="map_canvas"></div>
+            <div id="map_coords"></div>
+        </div>
+    </div>
+    <br/>
+
+</div>
+
+
+{% endblock %}

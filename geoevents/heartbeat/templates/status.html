@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container-narrow main-content" style="padding-top: 10px">
+        <div class="page-header">
+            <h1>System Status
+                <small> beta</small>
+            </h1>
+        </div>
+
+
+        {% regroup latest_test.testrunresult_set.all|dictsort:"test.group" by test.group as results %}
+        {% if results %}
+            <p>Latest test: {{ latest_test.created|timesince }} ago</p>
+            <a name="services"></a>
+            <table class="table table-bordered">
+                {% for test in results %}
+                    <thead style="background-color: #EEE;">
+                    <tr>
+                        <th colspan="2">{{ test.grouper }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for test in test.list|dictsort:"test.name" %}
+                        <tr>
+                            <td><b>{{ test.test.name }}</b></td>
+                            <td><span
+                                    class="label label-{% ifequal test.result "OK" %}success{% else %}warning {% endifequal %}">{{ test.result }}</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No recent tests.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+
+

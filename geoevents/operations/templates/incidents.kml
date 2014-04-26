@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://earth.google.com/kml/2.1"> 
+
+  <Document> 
+    <name>Incidents</name> 
+    <description>Incident Feed</description>
+
+
+  <Placemark> 
+    <name>{% if incident.name %}{{ incident.name }}{% else %} 
+{{ incident }}{% endif %}</name> 
+    <description>{% if location.description %} 
+{{ incident.description }}{% else %}{{ incident.name }}{% endif %}</description> 
+    <Point> 
+        <coordinates>{{incident.point.x}},{{incident.point.y}}, 0</coordinates> 
+    </Point> 
+  </Placemark> 
+
+
+
+</Document> 
+</kml> 

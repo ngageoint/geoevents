@@ -1,0 +1,112 @@
+[
+{
+  "pk": 2, 
+  "model": "operations.geowidget", 
+  "fields": {
+    "listName": "geonames", 
+    "style": null, 
+    "below_zoom": null, 
+    "selectorPoint": "{{lat}} {{lng}}", 
+    "url": "http://api.geonames.org/citiesJSON?formatted=true&north={{n}}&south={{s}}&east={{e}}&west={{w}}&username=jaycrossler&", 
+    "description": "Geonames Nearest Cities", 
+    "data_type": "json", 
+    "url_if_local": "", 
+    "tabToOpenIn": "_new", 
+    "selectorSummary": "{{fclName}}<br/>Code: {{countrycode}}<br/>Type: {{fcodeName}}<br/>Population: {{population}}", 
+    "selectorShowIf": null, 
+    "above_zoom": 14, 
+    "selectorLink": "{{wikipedia}}", 
+    "type": "List", 
+    "selectorName": "{{name}}", 
+    "name": "Nearest Cities"
+  }
+},
+{
+  "pk": 3, 
+  "model": "operations.geowidget", 
+  "fields": {
+    "listName": "pois", 
+    "style": null, 
+    "below_zoom": 9, 
+    "selectorPoint": "{{location.points[0].poslist}}", 
+    "url": "http://openpois.net/poiquery.php?bbox={{bbox}}&maxfeatures=10&format=application/json&callback=?", 
+    "description": "Points of Interest", 
+    "data_type": "json", 
+    "url_if_local": "", 
+    "tabToOpenIn": "_new", 
+    "selectorSummary": "", 
+    "selectorShowIf": null, 
+    "above_zoom": null, 
+    "selectorLink": "", 
+    "type": "List", 
+    "selectorName": "{{labels[0].value}}", 
+    "name": "OpenPOI lookup"
+  }
+},
+{
+  "pk": 4, 
+  "model": "operations.geowidget", 
+  "fields": {
+    "listName": "geonames", 
+    "style": null, 
+    "below_zoom": 5, 
+    "selectorPoint": "{{lat}} {{lng}}", 
+    "url": "http://api.geonames.org/wikipediaBoundingBoxJSON?formatted=true&north={{n}}&south={{s}}&east={{e}}&west={{w}}&username=jaycrossler&", 
+    "description": "Wikipedia Entries", 
+    "data_type": "json", 
+    "url_if_local": "", 
+    "tabToOpenIn": "_new", 
+    "selectorSummary": "{{summary}}", 
+    "selectorShowIf": null, 
+    "above_zoom": null, 
+    "selectorLink": "http://{{wikipediaUrl}}", 
+    "type": "List", 
+    "selectorName": "{{title}}", 
+    "name": "Wikipedia lookup"
+  }
+},
+{
+  "pk": 5, 
+  "model": "operations.geowidget", 
+  "fields": {
+    "listName": "weatherObservations", 
+    "style": null, 
+    "below_zoom": 7, 
+    "selectorPoint": "{{lat}} {{lng}}", 
+    "url": "http://api.geonames.org/weatherJSON?formatted=true&north={{n}}&south={{s}}&east={{e}}&west={{w}}&username=jaycrossler&", 
+    "description": "Geonames Weather", 
+    "data_type": "json", 
+    "url_if_local": "", 
+    "tabToOpenIn": "_new", 
+    "selectorSummary": "{{observation}}<br/>Temp: {{temperature}} C<br/>Condition: {{weatherCondition}}<br/>Clouds: {{clouds}}<br/>ICAO: {{ICAO}}", 
+    "selectorShowIf": null, 
+    "above_zoom": null, 
+    "selectorLink": "", 
+    "type": "List", 
+    "selectorName": "{{stationName}}", 
+    "name": "Weather lookup"
+  }
+},
+{
+  "pk": 6, 
+  "model": "operations.geowidget", 
+  "fields": {
+    "listName": "address", 
+    "style": null, 
+    "below_zoom": 14, 
+    "selectorPoint": "{{lat}} {{lng}}", 
+    "url": "http://api.geonames.org/findNearestAddressJSON?formatted=true&lat={{lat}}&lng={{lon}}&username=jaycrossler&", 
+    "description": "Geonames Nearest Address", 
+    "data_type": "json", 
+    "url_if_local": "", 
+    "tabToOpenIn": "_new", 
+    "selectorSummary": "", 
+    "selectorShowIf": null, 
+    "above_zoom": null, 
+    "selectorLink": "", 
+    "type": "List", 
+    "selectorName": "Address: {{streetNumber}} {{street}}<br/>{{placename}}, {{adminName1}} {{postalcode}}", 
+    "name": "Nearest Address"
+  }
+}
+]

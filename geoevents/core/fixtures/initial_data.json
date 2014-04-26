@@ -1,0 +1,130 @@
+[
+{
+    "pk": 1, 
+    "model": "core.setting", 
+    "fields": {
+        "name": "site_title", 
+        "value": "Geo Events"
+    }
+},
+{
+    "pk": 2, 
+    "model": "core.setting", 
+    "fields": {
+        "name": "organization_name", 
+        "value": "MyCompany"
+    }
+},
+{
+    "pk": 3, 
+    "model": "core.setting", 
+    "fields": {
+        "name": "email_share_text", 
+        "value": "Please see this geographic events page. Contact me if you need help logging in."
+    }
+},
+{
+    "pk": 4, 
+    "model": "core.setting", 
+    "fields": {
+        "name": "serverurl_owa", 
+        "value": ""
+    }
+},
+{
+    "pk": 5,
+    "model": "core.setting", 
+    "fields": {
+        "name": "serverurl_google_geocode", 
+        "value": "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address="
+    }
+},
+{
+    "pk": 6,
+    "model": "core.setting", 
+    "fields": {
+        "name": "header_banner", 
+        "value": "Public Releasable"
+    }
+},
+{
+    "pk": 7,
+    "model": "core.setting", 
+    "fields": {
+        "name": "site_active_events_title", 
+        "value": "Geo Events Page"
+    }
+},
+{
+    "pk": 8,
+    "model": "core.setting", 
+    "fields": {
+        "name": "serverurl_parent_linkto", 
+        "value": "https://www.google.com/"
+    }
+},
+{
+    "pk": 9,
+    "model": "core.setting", 
+    "fields": {
+        "name": "developer_team_name", 
+        "value": "TeamAwesome"
+    }
+},
+{
+    "pk": 10,
+    "model": "core.setting", 
+    "fields": {
+        "name": "owa_siteid", 
+        "value": ""
+    }
+},
+{
+    "pk": 11,
+    "model": "core.setting", 
+    "fields": {
+        "name": "serverurl_title_linkto", 
+        "value": "/"
+    }
+},
+{
+    "pk": 12,
+    "model": "core.setting", 
+    "fields": {
+        "name": "supporting_links_html", 
+        "value": "<h3 class=\"landing-page-header\"><i class=\"icon icon-download-alt\"></i>Supporting Apps</h3>\r\n<ul>\r\n            <li><a href='https://itunes.apple.com/us/app/adobe-connect-mobile-for-ios/id430437503?mt=8' target='_blank'>DCO Connect (iPhone)</a><br/>\r\n</ul>"
+    }
+},
+{
+    "pk": 13,
+    "model": "core.setting", 
+    "fields": {
+        "name": "serverurl_favicon", 
+        "value": "/favicon.ico"
+    }
+},
+{
+    "pk": 14,
+    "model": "core.setting", 
+    "fields": {
+        "name": "header_banner_text_color", 
+        "value": "white"
+    }
+},
+{
+    "pk": 15,
+    "model": "core.setting", 
+    "fields": {
+        "name": "header_banner_background_color", 
+        "value": "green"
+    }
+},
+{
+    "pk": 16,
+    "model": "core.setting",
+    "fields": {
+        "name": "serverurl_proxy_url_local",
+        "value": "/proxy/"
+    }
+}
+]

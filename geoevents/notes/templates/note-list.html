@@ -1,0 +1,43 @@
+ {% extends "base.html" %}
+ {% load markup %}
+ {% load url from future %}
+
+ {%block javascript%}
+<script type="text/javascript">
+	function init(){
+	$('.service_type').tooltip();
+}</script>
+ {%endblock%}
+ 
+ {%block main-content%}
+
+  {% if source_url %} 
+  <a href="{{source_url}}">Go back</a>
+  {% endif %}
+
+  <div class="page-header"><h1>{{notes_list|length}} Note{{notes_list|pluralize}}</h1></div>
+  <a href="{% url 'notes-manage-note' %}" class="btn btn-mini btn-success"><i class="icon-plus icon-white"></i> Add New Note</a><br/><br/>
+              <table class="table table-hover">
+              <tbody>
+			  <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Date Added</th>
+                  <th>Content</th>
+                  <th></th>
+                </tr>
+              </thead>
+              {% for note in notes_list%}
+                <tr>
+                   <td><a href="{{note.get_absolute_url}}">{{note.title}}</a></td>
+				   <td>{{note.created}}</td>
+					<td>{{note.content|truncatechars:70|markdown}}</td>
+					<td><a href="{% url 'notes-manage-note-id' note.id %}" class="btn btn-small btn-primary"><i class="icon-pencil icon-white"></i> Edit</a>  <a href="{% url 'notes-delete-note-id' note.id %}" class="btn btn-small btn-danger"><i class="icon-trash icon-white"></i> Delete</a></td>
+                </tr>
+               {%endfor%} 
+              </tbody>
+      </table>
+ 
+{% include "generic_paginator.html" %}
+ 
+ {%endblock%}

@@ -1,0 +1,27 @@
+{% load url from future %}
+
+  <table class="table table-hover">
+	<thead>
+		<tr>
+		  <th>Incident Name</th>
+		  <th>Date Added</th>
+		  <th>Posture</th>
+		  <th>Location</th>
+          <th>Active</th>
+		  <th>Notes</th>
+		</tr>
+	</thead>
+    <tbody>
+	{% for item in object_list %}
+		<tr>
+			<td><a href="{{item.get_absolute_url}}">{{item.name}}</a></td>
+			<td>{{item.created}}</td>
+			<td>{{item.posture}}</td>
+			<td>{{item.location}}</td>
+            <td>{%ifequal item.status 1%}Active{%else%}Closed {%endifequal%}</td>
+			<td>{{item.notes|length}}</td>
+			<td>{%if perms.operations.change_event%}<a href="{%url 'operations-manage-incident-pk' item.id%}" class="btn btn-mini btn-primary"><i class="icon-pencil icon-white"></i> Edit</a>{%endif%} </td>
+		</tr>
+	{% endfor %}
+    </tbody>
+ </table>

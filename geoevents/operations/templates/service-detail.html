@@ -1,0 +1,33 @@
+ {% extends "./base.html" %}
+ {% load markup %}
+ {% load url from future %}
+
+ {%block javascript%}
+<script type="text/javascript">
+	function init(){
+	$('.service_type').tooltip();
+}
+ </script>
+ {%endblock%}
+ 
+ {%block main-content%}
+  <div class="page-header"><h1>{{item.name}} <small>{{item.last_updated}}</small></h1></div>
+              <tbody>
+				 
+
+                <tr>
+                  <td> 
+                  <b>Title: </b>{{item.name}}<br/>
+                  <b>Type: </b> {% for type in item.service_type.all%}
+						<a href="#" rel="tooltip" class="label label-info service_type" data-original-title="{{type.description}}" data-placement="bottom">{{type}}</a> 
+						{%endfor%}<br/>
+                  <b>Tags: </b> {% for tag in item.tags.all%}<span class="label label-default">{{tag}}</span> {%endfor%}<br/>
+                  <b>Url: </b><a href="{{item.url}}" target="_new">{{item.url}}</a><br/>
+                  <b>Date Created:</b> {{item.created}}<br/>
+                  <b>Last Updated:</b> {{item.last_updated}}<br/><p>{{item.description|markdown}}</p></td>
+                </tr>
+                
+              </tbody>
+      </table>
+     {%if perms.operations.change_service%}<a href="{% url 'operations-manage-service-pk' item.id %}" class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Edit</a>{% endif %} {%if perms.operations.delete_service%}<a href="{% url 'operations-delete-service-pk' item.id %}" class="btn btn-danger btn-mini"><i class="icon-trash icon-white"></i> Delete</a>{% endif %}
+ {%endblock%}

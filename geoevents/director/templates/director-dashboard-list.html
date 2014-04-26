@@ -1,0 +1,90 @@
+{% extends "./base.html" %}
+{% block title %}: Director Dashboards{% endblock %}
+{% load url from future  %}
+
+{% block css %}
+<link href="{{STATIC_URL}}css/events-list-dashboard.css" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/>
+<link href="{{STATIC_URL}}timeline/timeline.css" rel="stylesheet">
+<style>
+     div.olControlAttribution {
+         bottom: 5px;
+         color: #f2cf31;
+         font-weight: bold;
+     }
+</style>
+{% endblock %}
+
+
+{% block javascript%}
+<script type="text/javascript" src="{{STATIC_URL}}timeline/timeline.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.cookie.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.ba-bbq.min.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}js/dashboard-support.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/settings-manager.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+    var settings = {};
+
+    //TODO: Need a better way to manage layer css within IE
+    if ($ && $.browser && $.browser.msie){
+        $('.span12').css('margin-left','0px');
+        $('.span9').css('margin-left','0px');
+    }
+
+    event_pages.options.staticRoot = '{{STATIC_URL}}';
+    event_pages.options.root = '{% url "home" %}';
+
+    settings = {{settings|safe}};
+    settings = event_pages.turnSettingsIntoObject(settings);
+
+    $(".brand").text("Executive Dashboards");
+
+});
+
+</script>
+{% endblock %}
+
+
+{% block content %}
+<div class="span12">
+
+    <!--Header-->
+    <div class="row-fluid">
+        <div class="header">
+            <div class="page-header"><h1>{{items|length}} Active Dashboard{{items|pluralize}}</h1></div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Org</th>
+                <th>Dashboard Name</th>
+                <th>Date Added</th>
+                <th>Status</th>
+                <th>Owner</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+            <tr>
+                <td><a href="{{item.get_absolute_url}}">{{item.org}}</a></td>
+                <td><a href="{{item.get_absolute_url}}">{{item.name}}</a></td>
+                <td>{{item.created}}</td>
+                <td>{{item.status}}</td>
+                <td>{{item.owner}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</div><!-- End of bottom column -->
+
+
+
+{% endblock %}

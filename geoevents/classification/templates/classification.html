@@ -1,0 +1,5 @@
+{% load staticfiles %}
+
+<span id="classified-top">
+    <p class="classification-text" style="color:{{ classification_text_color|default:'white'}}; background-color: {{ classification_background_color|default:'green' }}">{{ classification|default:'Public Releasable' }}</p>
+</span>

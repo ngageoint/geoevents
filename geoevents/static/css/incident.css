@@ -1,0 +1,87 @@
+
+.sidebar-nav {
+    padding: 9px 0;
+}
+footer p a {
+    margin-left:20px;
+    color:#39c;
+}
+div.olControlOverviewMapElement {
+    background-color: #3A87AD;
+    border-radius: 3px;
+}
+
+div.olControlAttribution {
+    bottom: 5px;
+    color: #f2cf31;
+    font-weight: bold;
+}
+
+.rfiContent {
+    max-height: 110px;
+    font-size: 0.8em;
+    overflow-y: auto;
+    background-color: #EEE;term
+}
+.smallDateType {
+    font-size: 0.65em;
+    font-weight: bold;
+}
+.input-append button.add-on {
+    height: inherit !important;
+}
+div.timeline-event.timeline-item-smts {
+    background-color: #88d;
+}
+div.timeline-event.timeline-event-dot.timeline-item-smts{
+    border-color: #88d;
+}
+div.timeline-event.timeline-item-rfi {
+    background-color: #ffa07a;
+}
+div.timeline-event.timeline-event-dot.timeline-item-rfi {
+    border-color: #ffa07a;
+}
+div.timeline-event.timeline-item-eventinfo {
+    background-color: #99e69f;
+}
+div.timeline-event.timeline-event-dot.timeline-item-eventinfo {
+    border-color: #99e69f;
+}
+
+/*@media print {
+  html, body {
+  height: auto;
+}*/
+
+.hero-unit{
+    padding: 7px;
+}
+
+#map_canvas {
+    height: 400px;
+    width: 100%;
+}
+
+.header-submenu .btn{
+    float:left;
+    margin:2px;
+    display:inline;
+}
+
+.header-submenu{
+    margin-bottom:3px;
+    clear:right;
+    margin-bottom:18px
+}
+
+
+#the-filters {
+    top:49px; left:59px;
+    width:300px;
+    display:none;
+}
+#rfis div {
+    font-size: .9em;
+}
+

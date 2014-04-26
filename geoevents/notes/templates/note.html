@@ -1,0 +1,22 @@
+ {% extends "base.html" %}
+ {% load url from future %}
+
+ {%block main-content%}
+  <div class="page-header"><h1>{{note.title}} <small>{{note.last_updated}}</small></h1></div>
+              <tbody>
+				 
+ {% load markup %}
+                <tr>
+                  <td> <b>Title: </b>{{note.title}}<br/>
+                  <b>Author:</b> {{note.owner}}<br/> 
+                  <b>Date Created:</b> {{note.created}}<br/>
+                  <b>Last Updated:</b> {{note.last_updated}}<br/><br/>
+                  <div class="well">{{note.content|markdown}}</div></td>
+                </tr>
+
+                
+              </tbody>
+      </table>
+
+     {%if perms.note.change_note%}<a href="{% url 'notes-manage-note-id' note.id %}" class="btn btn-primary"><i class="icon-pencil icon-white"></i> Edit</a>{% endif %} {%if perms.note.delete_note%}<a href="{% url 'notes-delete-note-id' note.id %}" class="btn btn-danger"><i class="icon-trash icon-white"></i> Delete</a>{% endif %}
+ {%endblock%}

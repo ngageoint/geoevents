@@ -1,0 +1,538 @@
+{% extends "base.html"%}
+
+{% block title %}: {{ item.name }}{% endblock %}
+
+{% load markup%}
+
+{% block css %}
+<link href="{{STATIC_URL}}css/incident.css" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/>
+<link href="{{STATIC_URL}}timeline/timeline.css" rel="stylesheet">
+<link href="{{STATIC_URL}}jquery-ui/cupertino/jquery-ui.min.css" rel="stylesheet"/>
+<link href="{{STATIC_URL}}css/widgets.css" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/>
+<link href="{{STATIC_URL}}datatables.net/css/demo_page.css" rel="stylesheet" />
+<link href="{{STATIC_URL}}datatables.net/css/demo_table.css" rel="stylesheet" />
+<link href="{{STATIC_URL}}datatables.net/css/dataTables.TableTools.css" rel="stylesheet" />
+
+{% endblock %}
+
+{% block javascript %}
+    {% include "incident-libraries.html" %}
+{% endblock %}
+{% block javascript_no_compress %}
+
+<script type="text/javascript">
+var settings = {};
+
+$(document).ready(function() {
+    //TODO: Need a better way to manage layer css within IE
+    if ($ && $.browser && $.browser.msie){
+        $('.span12').css('margin-left','0px');
+        $('.span9').css('margin-left','0px');
+    }
+
+    var event = {};
+
+    event.incidentIcon = '{%ifequal item.event_type "Hurricane/Cyclone"%}{{STATIC_URL}}images/hurricane_cyclone.png{%else%}{{STATIC_URL}}images/{{item.event_type|lower}}.png{%endifequal%}';
+    event.id = {{ item.id }};
+    event.products = [];
+    event.urlEvent = ""; //TODO: Find proper formatting of these lines
+    event.urlLessonsLearned = "";
+    event.urlAddTimeLineItem = "";
+    event.longitude = {{item.longitude}};
+    event.latitude = {{item.latitude}};
+    event.mapServices = {{item.map.map_layers_json|safe}};
+    event.productFeed = "{{item.product_feed|safe}}";
+    event.productFeedStd = "{{item.standard_product_url|safe}}";
+    event.created = '{{ item.created }}';
+    event.closed = '{{ item.closed }}';
+    event.lastUpdated = '{{ item.last_updated }}';
+    event.tags = {% if item.tags_as_list %}[{%for tag in item.tags_as_list%}'{{tag}}',{%endfor%}'']{%else%}[]{%endif%};
+    event.name = '{{item.name}}';
+    event.slug = '{{item.slug}}';
+    event.eventType = '{{item.event_type}}';
+    event.posture = '{{item.posture}}';
+    event.link = '{{ item.link }}';
+    event.collaborationLink = '{{ item.collaboration_link }}';
+    event.status = '{{ item.status }}';
+    event.show_event_on_map = {{ item.show_event_on_map|lower }};
+    event.map = {{ item.map.map_json|safe }};
+    event.timelineID = 'event_timeline';
+    event.rfiFeed = '{{item.rfi_feed|safe}}';
+    event.rfisID = 'rfis';
+    event.rfiCatsToCount = ['Not Verified','In Progress','Completed'];
+    event.rfiSubtextID = 'rfi_subtext';
+    event.timelineItems = {{ item.timeline_items_json|safe }};
+    event.allowClicksForInfo = true;//(document.location.hostname!='localhost');
+    event.fullScreenLink = '{% url "operations-view-full-incident" item.id %}';
+    event.normalScreenLink = '{% url "operations-view-incident" item.id %}';
+    event.brandingLogo = '{{SITE_BRANDING_LOGO}}';
+    event.brandingTitle = '{{SITE_TITLE}}';
+    event.staticRoot = '{{STATIC_URL}}';
+    event_pages.options.staticRoot = '{{STATIC_URL}}';
+    event_pages.options.root = '{% url "home" %}';
+
+    event.fileDir = '{{item.filedropoff_path}}';
+    event.files = {% if item.filedropoff_path %}{{ item.files_in_dropoff_folder|safe}}{%else%}[]{%endif%};
+    event.gqProjectIDs = '{{item.gq_project_ids}}';
+    event.gqJobIDs = '{{item.gq_job_ids}}';
+    event.deployments = {{ item.deployments_json|safe }};
+    event.location = '{{item.event_location}}';
+
+    settings = {{settings|safe}};
+    settings = event_pages.turnSettingsIntoObject(settings);
+    settings.page_title_addition = ': {{ item.name }}';
+    settings.hasFlash = false;
+    try {
+        var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+        if(fo) settings.hasFlash = true;
+    }catch(e){
+        if(navigator.mimeTypes ["application/x-shockwave-flash"] != undefined) {
+            settings.hasFlash = true;
+        }
+    }
+
+    event.geoWidgets = {{ item.geowidgets_json|safe|default:'[]' }};
+
+
+//    event.notes = notes|safe; //TODO: Move to the contextprocessor approach
+    event.notes = [];
+    {% for note in item.notes %}
+        event.notes.push({
+            title:'{{note.title}}',
+            content:'See notes above for details',
+            posted:'{{note.last_updated}}',
+            postBy:'{{note.owner}}'});
+        {% endfor %}
+
+    incident_support.init(event);
+
+    if ($.browser && $.browser.msie && !settings.hideIEPopup) {
+        //IE Popup warning
+        var majorVersion = 1.0*($.browser.version.split(".")[0]);
+        var modal = "No";
+        if(majorVersion == 7){
+            /*  modalIEWindow has a message telling the user to click "No" when they are
+             prompted if they would like to only show secure content. This is appropriate
+             for IE8+ but if the user is using IE7 the pop-up asks the user if they would
+             like to display secure and non-secure content so the correct answer is 'Yes.' */
+            modal = "Yes";
+            if (document.documentMode && document.documentMode==7) modal="No";
+        }
+        $("#modalIEWindowAnswer").html(modal);
+        if ($.cookie('ie_dont_show_popup')!='nevermore'){
+            $('#modalIEWindow').modal();
+            $('#popup_ie_nevershow').click(function(){
+                $.cookie('ie_dont_show_popup', 'nevermore');
+                $('#modalIEWindow').modal('hide');
+            });
+        }
+    } else if (document.getElementById('files')) {
+        document.getElementById('files').addEventListener('change', handleFileSelect, false);
+    }
+
+});
+
+</script>
+{% endblock %}
+
+
+{% block main-content %}
+<!--Beginning of Left column-->
+<div class="span9">
+
+    <!--Header-->
+    <div class="row-fluid">
+        <div class="header">
+            <div class="page-header"><h2> {{item.name}}</h2></div>
+            <div class="header-subtext">
+                <div class="main title nav-header">Created: {{ item.created }}</div>
+                <div class="sub-items"><span class="nav-header title">TAGS:</span>{% if item.tags_as_list %}{%for tag in item.tags_as_list%} <span class="label label-info">{{tag}}</span> {%endfor%} {%else%} No Tags {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Map-->
+    <div class="row-fluid">
+        <div class="thumbnail">
+            <div id="map_canvas"></div>
+            <div><span id="map_coords">{{item.event_location}}</span><span id="map_dtg" style="float:right"></span></div>
+        </div>
+        <div id="selected_feature_info"></div>
+        <div>
+            <input type="text" id="address_lookup_box" size=50 name="query" value="{{item.event_location}}"/>
+            <a class="btn btn-mini" style="vertical-align:top;" id="address_lookup_submit">Lookup Address</a>
+
+            <a class="btn btn-mini pull-right" style="vertical-align:top;">
+                <i class="icon-zoom-in" style="margin-top: -1px;"></i>
+                <b id="scroll_zoom_toggle">Scroll Zooms</b>
+            </a>
+
+            <a class="btn btn-mini pull-right" style="vertical-align:top;">
+                <i class="icon-download" style="margin-top: -1px;"></i>
+                <b id="lookup_widgets_toggle">GeoLinks</b>
+            </a>
+
+            <a class="btn btn-mini pull-right" style="vertical-align:top;">
+                <i class="icon-pencil" style="margin-top: -1px;"></i>
+                <b id="ia_tools_toggle">Image Tools</b>
+            </a>
+
+
+        </div>
+        <div class="thumbnail" id="map_layer_ia_tools" style="display:none;position:relative;"></div>
+        <div class="thumbnail" id="map_result_widget_bar" style="display:none"></div>
+
+    </div>
+
+    <!--Overview-->
+    <div class="row-fluid" id="overview">
+
+        <h3 class="landing-page-header">Overview<span class="header-actions pull-right" id="downloadable_button_holder"><a class="btn btn-mini pull-right" href="{% url 'operations-view-incident-kml' item.id %}">Download Location as KML</a></span></h3>
+          <!--<div class="header-subtext">
+              <ul class="header-subtext-actions">
+                  <li><a class="btn btn-mini" href="{% url 'operations-view-incident-kml' item.id %}">Download Location as KML</a></li>
+              </ul>
+          </div>-->
+        <p class="linkify">{{item.description|markdown}}</p>
+    </div>
+    <br>
+
+    <div class="row-fluid">
+
+        <!--RFIs-->
+        {% if item.show_rfis %}
+        <div class="span6">
+            <div class="rfi">
+                <h3 class="landing-page-header"><i class="icon icon-question-sign"></i>RFIs<span class="header-actions pull-right">
+		  <a href="{% if item.rfi_generator_id %}{{ RFI_GENERATOR_URL }}/admin/new?event={{ item.rfi_generator_id }}{% else %}{{ RFI_GENERATOR_URL }}/admin/new{% endif %}" class="btn btn-mini" target="_blank">Submit RFI</a></span>
+                </h3>
+                <div class="header-subtext">
+                    <div id="rfi_subtext" class="row-fluid content">No RFIs Recieved</div>
+                    <ul class="header-subtext-actions"></ul>
+                </div>
+                <div id='rfis' style='max-height:360px;overflow-y:auto;margin:2px;padding:3px'>
+
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!--Notes-->
+        {% if item.show_notes %}
+        <div class="span6">
+            <div class="notes">
+                <h3 class="landing-page-header"><i class="icon icon-comment"></i>Event Notes{% if perms.notes.add_note%}<span class="header-actions pull-right"><a class="btn btn-mini" href="{%url 'notes-manage-note-model-id' 'event' item.pk%}">Add New Note</a></span>{% endif %}
+                </h3>
+                <div class="header-subtext">
+                    <ul class="header-subtext-actions"></ul>
+                </div>
+                <div id="notes" style='max-height:360px;margin:2px;padding:3px'>
+                    {%if item.notes%}
+                    <ul class="notes-list" style='max-height:360px;overflow-y:auto'>
+                        {% for note in item.notes %}
+                        <li class="note">
+                            <a href="{{note.get_absolute_url}}" class="title"><b>{{note.title|title}}</b></a>
+                            <div class="notes-text">
+                                {{note.content|markdown}}
+                            </div>
+                            <p class="user-post-text"><i class="muted">Posted {{note.last_updated|timesince}} ago by <b>{{note.owner}}</b>.</i></p>
+                            <div class="clearfix"></div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {%else%}
+                    <p>No notes have been submitted for this incident.</p>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+    <br/>
+
+
+    <!--Products-->
+    {% if item.show_products %}
+    <div class="row-fluid" id="product">
+        <h3 class="landing-page-header"><i class="icon icon-picture"></i>Products
+            <span class="header-actions pull-right" id="smts_header">
+                <a class="btn btn-mini" style="vertical-align:top;" href="https://egeoint.nrlssc.navy.mil/metaclientjs" target="_blank">Upload Product</a>
+                <span class='btn-group'>
+                    <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">Product Formats <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href='{{item.product_feed|safe}}&outputformat=georss' alt='Get GeoRSS'>As GeoRSS</a></li>
+                        <li><a href='{{item.product_feed|safe}}&outputformat=statickml' alt='KML Snapshot of current info, not to be entered as a network link'>As KML</a></li>
+                        <li><a href='{{item.product_feed|safe}}&outputformat=kml' alt='KML link that should be added in Google Earth as a Network Link (will need name/pw)'>As KML Network Link</a></li>
+                    </ul>
+                </span>
+            </span>
+        </h3>
+        <div class="header-subtext"></div>
+        <div id="products">
+            <p>Searching for products published for this event...</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <br/>
+
+</div>
+
+<!--Right Column-->
+<div class="span3">
+
+    <!--About-->
+    <div class="row-fluid">
+        <h3 class="landing-page-header" style="margin-top: 16px;"><i class="icon icon-info-sign"></i>About <span class="header-actions pull-right">
+        {%if perms.operations.change_event%}
+        <div class="btn-group">
+            <a class="btn  btn-mini" href="{%url 'operations-manage-incident-pk' item.pk %}">Edit Event</a>
+            <button class="btn btn dropdown-toggle btn-mini" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right">
+                {%if perms.operations.add_deployment%}<li><a href="{% url 'operations-manage-deployment' %}?event={{ item.pk }}">Add Deployment</a></li>{% endif %}
+                {%if perms.operations.add_sitrep%}<li><a href="{% url 'operations-manage-sitrep' %}?event={{ item.pk }}">Add Sitrep</a></li>{% endif %}
+                {%if perms.notes.add_note%}<li><a href="{%url 'notes-manage-note-model-id' 'event' item.pk%}">Add Note</a></li>{% endif %}
+                {%if perms.operations.add_lessonlearned%}<li><a href="#myModal" data-toggle="modal">Add Lesson Learned</a></li>{% endif %}
+            </ul>
+        </div>
+        {%endif%}</span></h3>
+    </div>
+
+    <!--About this Event-->
+    <div class="row-fluid">
+        <div>
+            <strong>Event Type:</strong> {{item.event_type}}
+            <br/><strong>Location:</strong> {{item.event_location}}
+            <br/><span id='item_last_updated'><strong>Last Updated:</strong> {{item.last_updated}}</span>
+            <span id="countdown_clock"></span>
+            <br/><strong>Posture:</strong> {{item.posture}}
+            <br/><strong>Collaborate:</strong> <a href='{{item.collaboration_link|safe}}' target='_blank'>Click Here</a>
+            <br/><strong>POC:</strong> {{item.poc|safe}}
+        </div>
+
+    </div>
+
+
+    <a id="share_button" class="btn btn-mini" target="new" href="#">
+        <i class="icon-envelope" style="margin-top: -1px;"></i>
+        <b>Share This Event</b>
+    </a>
+
+    <a id="settings_button" class="btn btn-mini" href="#">
+        <i class="icon-cog" style="margin-top: -1px;"></i>
+        <b>Settings</b>
+    </a>
+
+    <br/>
+
+    <div class="row-fluid" id="settings_content" style="display:none">
+        <h3 class="landing-page-header" style="margin-top: 16px;"><i class="icon icon-cog"></i>Settings</h3>
+        <div id="settings_content_list"></div>
+    </div>
+
+    {% if item.show_related_files and item.files_in_dropoff_folder%}
+    <!-- Files -->
+    <div class="row-fluid">
+        <h3 class="landing-page-header"><i class="icon icon-file"></i>Shared Files</h3>
+        <div class="btn-group" id="dropbox_button">
+        </div>
+        <div id="event_file_dropbox"></div>
+    </div>
+    <br/>
+    {% endif %}
+
+    <!-- Supporting Agencies -->
+    {% if item.show_supporting_agencies %}
+        <!-- Agency logos should be 60px by 60px -->
+        <div class="row-fluid">
+            <h3 class="landing-page-header"><i class="icon icon-flag"></i>Supporting Organizations</h3>
+            {% if item.agencies.all %}
+                {% for agency in item.agencies.all %}
+                    <a href="{{ agency.url }}" target="_new"><img src="{{ agency.logo_url }}" title="{{ agency.name }}"/></a>
+                {% endfor %}
+            {% else %}
+                <p>No supporting agencies have been added.</p>
+            {% endif %}
+        </div>
+        <br/>
+    {% endif %}
+
+    <!--Deployments-->
+    {% if item.show_deployments %}
+
+    <div class="row-fluid">
+
+        <div class="deployments">
+          <h3 class="landing-page-header"><i class="icon icon-road"></i>Deployments{% if perms.operations.add_deployment%}<span class="header-actions pull-right"><a class="btn btn-mini pull-right" href="{%url 'operations-manage-deployment' %}?event={{ item.pk }}">Add New</a></span>{% endif %}</h3>
+          <ul class="deployments-list">
+              {% if item.deployments %}
+              {%for deployment in item.deployment_set.iterator%}
+                  <li id="deployment_data_{{ deployment.id }}"><a href="{%url 'operations-view-deployment-pk' deployment.id%}"><b>{{deployment}}</b></a>
+                      <p class="subitem"><b>Deployers:</b> {{ deployment.deployer_names }}</p>
+
+              {%endfor%}
+              {% else %}
+                  <li>No Deployments for this event.</li>
+              {% endif %}
+          </ul>
+        </div>
+    </div>
+
+    {% endif %}
+
+    <!--Functions-->
+    <!--<div class="row-fluid" id="map_functions" style='display: none;'>-->
+        <!--<div class="functions">-->
+            <!--<h3 class="landing-page-header">Map Functions</h3>-->
+            <!--<ul class="services-list">-->
+                <!--<li>-->
+                    <!--<span style='font-size: 10px;'><i class="icon icon-map-marker"></i>-->
+                    <!--Load points from .shp file<input type="file" id="files" name="files[]"></span>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--<br/>-->
+    <!--</div>-->
+
+    <!--Resources-->
+    {% if item.show_services %}
+    <div class="row-fluid">
+        <div class="services">
+            <h3 class="landing-page-header">Resources{%if perms.operations.add_service%}<span class="header-actions pull-right"><a class="btn btn-mini" href="{% url 'operations-manage-service-model' 'event' object.id %}">Add New Resource</a></span>{% endif %}</h3>
+
+            <ul class="services-list">
+                {% if item.services.all %}
+                    {%for service in item.services.all|slice:":10"%}
+                    <li>
+                        <span style="float:left; margin-right:3px"><i class="icon icon-map-marker"></i></span>
+                        <a href="{{service.get_absolute_url}}" style="display: block;overflow: hidden;" target="_blank">{{service.name}}</a>
+                        <p>Created {{ service.created }}</p>
+                    </li>
+                    {%endfor%}
+                 {% else %}
+                    <li>No services have been added for this event.</li>
+                {% endif %}
+            </ul>
+                {% if item.services.all|length > 10 %}
+                <p>Showing <b>10</b> of <b>{{ item.services.all|length }}</b> services.  <a href="{% url 'operations-view-services' %}?event={{ item.id }}"> See all.</a></p>
+                {% endif %}
+        </div>
+    </div>
+    <br/>
+    {% endif %}
+
+    <!--Apps-->
+    {%  if item.show_supporting_agencies %}
+    <div class="row-fluid" id='supporting_links'>
+    </div>
+    <br/>
+    {% endif %}
+
+    <!-- Show Geomedia Triage -->
+    {% if item.show_geomedia_triage and perms.geomedia.add_geomedia%}
+        <div class="row-fluid">
+            <div id="geonode_links">
+                <h3 class="landing-page-header"><i class="icon icon-thumbs-up"></i>Make/Upload Layers</h3>
+                <span style="margin: 0px 3px 0px 12px"><i class="icon icon-map-marker"></i></span>
+                <a id='geonode_link' href="#" target="_new">GeoNode to upload shape files</a>
+            </div>
+
+            <h3 class="landing-page-header"><i class="icon icon-thumbs-up"></i>Social Network Layer</h3>
+            <span style="margin: 0px 3px 0px 12px"><i class="icon icon-map-marker"></i></span>
+
+            <div id='social_links_note'></div>
+            <div id='social_links'></div>
+        </div>
+        <br/>
+    {% endif %}
+
+    <!-- GeoQ link -->
+    <div class="row-fluid">
+        <div id='geoq_link'></div>
+    </div>
+
+    {%if perms.operations.add_lessonlearned%}
+    <div class="row-fluid">
+
+        <div class="modal hide fade" id="myModal">
+            <form id="lesson-learned-form" class="no-margin">{% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Add Lesson Learned</h3>
+                </div>
+
+                <div id="lesson-learned-model-body"  class="modal-body">
+
+                    {{ lesson_learned_form.as_p }}
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="lesson-learned-modal-clear" class="btn">Clear</a>
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+</div><!--End of Right column-->
+
+<div class="row-fluid">
+    <!-- Container to hold additional plugins -->
+    <div class="span12" id="plugin_container" style="display: none"></div>
+
+    <!--Timeline-->
+    {% if item.show_timeline %}
+    <div class="span12" style="margin-left: 0px">
+        <h3 class="landing-page-header">Event Timeline<span class="header-actions pull-right">
+           {% if perms.timeline.add_timeline_item%} <a class="btn btn-mini" role="button" data-toggle="modal" href="#timeline-modal">Add Item to Timeline</a>{% endif %}
+            <span class="btn btn-mini" id="timeline_size_change">Increase Height</span>
+        </h3>
+        <div class="modal hide fade" id="timeline-modal">
+            <form id="timeline-item-form" class="no-margin">{% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Add Item to Timeline</h3>
+                </div>
+
+                <div id="timeline-modal-body"  class="modal-body">
+
+                    {{ timeline_item_form.as_p }}
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="timeline-modal-clear" class="btn">Clear</a>
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="thumbnail">
+            <div id="event_timeline"></div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div id="modalIEWindow" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup_header" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 id="popup_header">Internet Explorer Security Popup</h3>
+        </div>
+        <div class="modal-body">
+            <p>In IE, you might receive a popup window. Please choose "<span id="modalIEWindowAnswer">No</span>" to be able to view all map layers (this shows both HTTPS encrypted and HTTP non-encrypted map sources)</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button id="popup_ie_nevershow" class="btn btn-primary">OK</button>
+        </div>
+    </div>
+
+
+</div><!-- End of bottom column -->
+
+{% endblock %}

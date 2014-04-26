@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+ {%block main-content%}
+  <style>
+    select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]{
+        margin-bottom: 0;
+    }
+    .errorlist {
+        margin-top: 8px;
+        margin-bottom: 0px;
+        background-color: red;
+        color: black;
+        width: 400px;
+        border-radius: 4px;
+        padding: 4px;
+        margin-left: 0px;
+    }
+    .helptext {
+        font-style: italic;
+        font-size: .8em;
+    }
+  </style>
+  <script>
+      var reportForm = {};
+      reportForm.init = function() {
+          var urlPieces = _.str.rtrim(document.location.pathname,"/").split("/");
+          urlPieces = urlPieces[urlPieces.length-1];
+          var boardNum = parseInt(urlPieces);
+
+          if (boardNum) {
+              $("#id_owning_organization").val(boardNum);
+          }
+
+          var dtg = moment();
+          dtg = dtg.format("YYYY-MM-DD HH:mm:ss"); //2014-02-14 05:00:00+00:00
+          $("#id_date_assigned").val(dtg);
+
+          var user_id = '{{ request.user.id }}';
+          if (user_id){
+              var $user = $("#id_originator");
+              $user.val(user_id);
+          }
+
+          var category = _.str.ltrim(document.location.hash,"#");
+          if (category) {
+              $("#id_category").val(category);
+          }
+      };
+
+      $(document).ready( reportForm.init );
+
+  </script>
+
+  <div class="page-header"><h1>{{form.title.value|default_if_none:"Add a Report"}} <small>{{item.last_updated}}</small></h1></div>
+  <form method="post" action="">{% csrf_token %}
+
+<table>
+  {{form}}
+</table>
+<br/><br/><input type="submit" value="Save" data-role="button" class="btn btn-default btn-small" /> {%if form.pk%}<a href="{{delete_url}}" class="btn btn-small btn-danger"><i class="icon-trash icon-white"></i> Delete</a>{%endif%}
+</form> 
+
+{%endblock%}

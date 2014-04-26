@@ -1,0 +1,1043 @@
+[
+    {
+        "type": "Feature",
+        "properties": {
+            "ctpid": "BAH.SMTS.CASIE.48BDABA448D94CADB6A59460CB1ECB56",
+            "title": "This is a test for 10/9/13 - LLL",
+            "description": "This is a test for 10/9/13 - LLL",
+            "dateposted": "2014-04-01T09:29:58Z",
+            "recorddate": "2014-04-01T12:32:32Z",
+            "publisher": [
+                {
+                    "name": "Consolidated Analytic Spatial Initiative (CASi)"
+                }
+            ],
+            "creator": [
+                {
+                    "name": "Lew",
+                    "surname": "Long",
+                    "affiliation": "CASi"
+                }
+            ],
+            "virtualCoverage": [
+                {
+                    "address": "http://casidev01/gwr/posting/details.htm?id=48BDABA448D94CADB6A59460CB1ECB56"
+                },
+                {
+                    "address": "http://casidev01/gwr/downloads/48BDABA448D94CADB6A59460CB1ECB56/Desert.jpg"
+                }
+            ],
+            "subjectCoverage": [
+                {
+                    "qualifier": "GOUSE",
+                    "value": "Imagery"
+                },
+                {
+                    "qualifier": "NETWORK",
+                    "value": "JWICS"
+                },
+                {
+                    "qualifier": "CTP",
+                    "value": "CASi"
+                },
+                {
+                    "qualifier": "GOTYPE",
+                    "value": "Non-standard PRODUCT"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "climatologymeteorologyatmosphere"
+                },
+                {
+                    "qualifier": "MGRS_COORDINATE",
+                    "value": "31UDQ4877634570"
+                },
+                {
+                    "qualifier": "UTM_COORDINATE",
+                    "value": "31 N 448776 5434570"
+                }
+            ],
+            "keywords": [
+                "Agriculture / Forestry / Food",
+                "climatologymeteorologyatmosphere"
+            ],
+            "classifiedby": "XXXXXXXX, NGA",
+            "owerproducer": "USA",
+            "classification": "U"
+        },
+        "geometry": [
+            {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            2.29875,
+                            49.06182
+                        ],
+                        [
+                            2.29885,
+                            49.06182
+                        ],
+                        [
+                            2.29885,
+                            49.06192
+                        ],
+                        [
+                            2.29875,
+                            49.06192
+                        ],
+                        [
+                            2.29875,
+                            49.06182
+                        ]
+                    ]
+                ]
+            },
+            {
+                "type": "Point",
+                "coordinates": [
+                    -86.5898,
+                    34.73549
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "ctpid": "BAH.SMTS.CASIE.E1B914381A8349D0BFAEA148F7313CAC",
+            "title": "Time to Move BFK FF",
+            "description": "Text goes here.",
+            "dateposted": "2014-04-01T11:29:58Z",
+            "recorddate": "2014-04-02T09:29:58Z",
+            "publisher": [
+                {
+                    "name": "Consolidated Analytic Spatial Initiative (CASi)"
+                }
+            ],
+            "creator": [
+                {
+                    "name": "Betty",
+                    "surname": "Kelly",
+                    "affiliation": "KEYW"
+                }
+            ],
+            "virtualCoverage": [
+                {
+                    "address": "http://casidev01/gwr/posting/details.htm?id=E1B914381A8349D0BFAEA148F7313CAC"
+                },
+                {
+                    "address": "http://casidev01/gwr/downloads/E1B914381A8349D0BFAEA148F7313CAC/Aruba_Sailing_And_Sunset.jpg"
+                }
+            ],
+            "subjectCoverage": [
+                {
+                    "qualifier": "GOUSE",
+                    "value": "Imagery"
+                },
+                {
+                    "qualifier": "NETWORK",
+                    "value": "JWICS"
+                },
+                {
+                    "qualifier": "CTP",
+                    "value": "CASi"
+                },
+                {
+                    "qualifier": "GOTYPE",
+                    "value": "Non-standard PRODUCT"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "climatologymeteorologyatmosphere"
+                },
+                {
+                    "qualifier": "MGRS_COORDINATE",
+                    "value": "53JQM6145882672"
+                },
+                {
+                    "qualifier": "UTM_COORDINATE",
+                    "value": "53 S 761459 7182672"
+                }
+            ],
+            "keywords": [
+                "Agriculture / Forestry / Food",
+                "climatologymeteorologyatmosphere",
+                "Business / Financial"
+            ],
+            "owerproducer": "USA",
+            "classification": "U"
+        },
+        "geometry": [
+            {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            102.445279,
+                            -49.007821
+                        ],
+                        [
+                            172.757779,
+                            -49.007821
+                        ],
+                        [
+                            172.757779,
+                            -1.898446
+                        ],
+                        [
+                            102.445279,
+                            -1.898446
+                        ],
+                        [
+                            102.445279,
+                            -49.007821
+                        ]
+                    ]
+                ]
+            },
+            {
+                "type": "Point",
+                "coordinates": [
+                    -86.5891,
+                    34.7351
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "ctpid": "BAH.SMTS.CASIE.737BF189918A493F88EC97DD4982D82B",
+            "title": "Moving the area",
+            "description": "No words",
+            "dateposted": "2014-04-03T11:29:58Z",
+            "recorddate": "2014-04-03T14:29:58Z",
+            "publisher": [
+                {
+                    "name": "Consolidated Analytic Spatial Initiative (CASi)"
+                }
+            ],
+            "creator": [
+                {
+                    "name": "Betty",
+                    "surname": "Kelly",
+                    "affiliation": "KEYW"
+                }
+            ],
+            "virtualCoverage": [
+                {
+                    "address": "http://casidev01/gwr/posting/details.htm?id=737BF189918A493F88EC97DD4982D82B"
+                },
+                {
+                    "address": "http://casidev01/gwr/downloads/737BF189918A493F88EC97DD4982D82B/Desert.jpg"
+                }
+            ],
+            "subjectCoverage": [
+                {
+                    "qualifier": "GOUSE",
+                    "value": "Imagery"
+                },
+                {
+                    "qualifier": "NETWORK",
+                    "value": "JWICS"
+                },
+                {
+                    "qualifier": "CTP",
+                    "value": "CASi"
+                },
+                {
+                    "qualifier": "GOTYPE",
+                    "value": "Non-standard PRODUCT"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "elevation"
+                },
+                {
+                    "qualifier": "MGRS_COORDINATE",
+                    "value": "21JTN9874028031"
+                },
+                {
+                    "qualifier": "UTM_COORDINATE",
+                    "value": "21 S 298740 7228032"
+                }
+            ],
+            "keywords": [
+                "Construction",
+                "elevation",
+                "Business / Financial"
+            ],
+            "owerproducer": "USA",
+            "classification": "U"
+        },
+        "geometry": [
+            {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -88.5235367,
+                            -58.8094277
+                        ],
+                        [
+                            -29.4610367,
+                            -58.8094277
+                        ],
+                        [
+                            -29.4610367,
+                            8.6905722
+                        ],
+                        [
+                            -88.5235367,
+                            8.6905722
+                        ],
+                        [
+                            -88.5235367,
+                            -58.8094277
+                        ]
+                    ]
+                ]
+            },
+            {
+                "type": "Point",
+                "coordinates": [
+                    -86.5882,
+                    34.7342
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "ctpid": "BAH.SMTS.CASIE.9AA406D4D8784540B3086E7E4F6756BE",
+            "title": "Moving to CA",
+            "description": "&quot;Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?&quot;",
+            "dateposted": "2014-04-04T02:29:58Z",
+            "recorddate": "2014-04-01T08:29:58Z",
+            "publisher": [
+                {
+                    "name": "Consolidated Analytic Spatial Initiative (CASi)"
+                }
+            ],
+            "creator": [
+                {
+                    "name": "Betty",
+                    "surname": "Kelly",
+                    "affiliation": "KEYW"
+                }
+            ],
+            "virtualCoverage": [
+                {
+                    "address": "http://casidev01/gwr/posting/details.htm?id=9AA406D4D8784540B3086E7E4F6756BE"
+                },
+                {
+                    "address": "http://casidev01/gwr/downloads/9AA406D4D8784540B3086E7E4F6756BE/Aruba_Sailing_And_Sunset.jpg"
+                }
+            ],
+            "subjectCoverage": [
+                {
+                    "qualifier": "GOUSE",
+                    "value": "Imagery"
+                },
+                {
+                    "qualifier": "NETWORK",
+                    "value": "JWICS"
+                },
+                {
+                    "qualifier": "CTP",
+                    "value": "CASi"
+                },
+                {
+                    "qualifier": "GOTYPE",
+                    "value": "Non-standard PRODUCT"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "boundaries"
+                },
+                {
+                    "qualifier": "MGRS_COORDINATE",
+                    "value": "53JQM5991404550"
+                },
+                {
+                    "qualifier": "UTM_COORDINATE",
+                    "value": "53 S 759914 7104550"
+                }
+            ],
+            "keywords": [
+                "Apparel / Leather / Wood",
+                "boundaries",
+                "Business / Financial"
+            ],
+            "owerproducer": "USA",
+            "classification": "U"
+        },
+        "geometry": [
+            {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            98.929654,
+                            -45.8437585
+                        ],
+                        [
+                            176.273404,
+                            -45.8437585
+                        ],
+                        [
+                            176.273404,
+                            -6.4687585
+                        ],
+                        [
+                            98.929654,
+                            -6.4687585
+                        ],
+                        [
+                            98.929654,
+                            -45.8437585
+                        ]
+                    ]
+                ]
+            },
+            {
+                "type": "Point",
+                "coordinates": [
+                    -86.5879,
+                    34.7349
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "ctpid": "BAH.SMTS.CASIE.207092CA9AFC4B42872AA8D9C0B37DFB",
+            "title": "VIRGINIA - to CA",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "dateposted": "2014-04-04T09:29:58Z",
+            "recorddate": "2014-04-01T11:29:58Z",
+            "publisher": [
+                {
+                    "name": "Consolidated Analytic Spatial Initiative (CASi)"
+                }
+            ],
+            "creator": [
+                {
+                    "name": "Betty",
+                    "surname": "Kelly",
+                    "affiliation": "KEYW"
+                }
+            ],
+            "virtualCoverage": [
+                {
+                    "address": "http://casidev01/gwr/posting/details.htm?id=207092CA9AFC4B42872AA8D9C0B37DFB"
+                },
+                {
+                    "address": "http://casidev01/gwr/downloads/207092CA9AFC4B42872AA8D9C0B37DFB/sailing-into-the-sunset-ms-judi.jpg"
+                }
+            ],
+            "subjectCoverage": [
+                {
+                    "qualifier": "GOUSE",
+                    "value": "Imagery"
+                },
+                {
+                    "qualifier": "NETWORK",
+                    "value": "JWICS"
+                },
+                {
+                    "qualifier": "CTP",
+                    "value": "CASi"
+                },
+                {
+                    "qualifier": "GOTYPE",
+                    "value": "Non-standard PRODUCT"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "boundaries"
+                },
+                {
+                    "qualifier": "MGRS_COORDINATE",
+                    "value": "50RQV7586073135"
+                },
+                {
+                    "qualifier": "UTM_COORDINATE",
+                    "value": "50 N 775860 3473135"
+                }
+            ],
+            "keywords": [
+                "Business / Financial",
+                "boundaries",
+                "Construction"
+            ],
+            "owerproducer": "USA",
+            "classification": "U"
+        },
+        "geometry": [
+            {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            96.6093102,
+                            12.3749838
+                        ],
+                        [
+                            143.0155602,
+                            12.3749838
+                        ],
+                        [
+                            143.0155602,
+                            50.3437338
+                        ],
+                        [
+                            96.6093102,
+                            50.3437338
+                        ],
+                        [
+                            96.6093102,
+                            12.3749838
+                        ]
+                    ]
+                ]
+            },
+            {
+                "type": "Point",
+                "coordinates": [
+                    -86.5897,
+                    34.73551
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "ctpid": "BAH.SMTS.CASIE.6D9901747B014A709157167D77C3EA97",
+            "title": "Check change from VA to CA 2nd Try in FF",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "dateposted": "2014-04-05T01:29:58Z",
+            "recorddate": "2014-04-05T09:29:58Z",
+            "publisher": [
+                {
+                    "name": "Consolidated Analytic Spatial Initiative (CASi)"
+                }
+            ],
+            "creator": [
+                {
+                    "name": "Betty",
+                    "surname": "Kelly",
+                    "affiliation": "KEYW"
+                }
+            ],
+            "virtualCoverage": [
+                {
+                    "address": "http://casidev01/gwr/posting/details.htm?id=6D9901747B014A709157167D77C3EA97"
+                },
+                {
+                    "address": "http://casidev01/gwr/downloads/6D9901747B014A709157167D77C3EA97/flat,550x550,075,f.jpg"
+                }
+            ],
+            "subjectCoverage": [
+                {
+                    "qualifier": "GOUSE",
+                    "value": "Imagery"
+                },
+                {
+                    "qualifier": "NETWORK",
+                    "value": "JWICS"
+                },
+                {
+                    "qualifier": "CTP",
+                    "value": "CASi"
+                },
+                {
+                    "qualifier": "GOTYPE",
+                    "value": "Non-standard PRODUCT"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "economy"
+                },
+                {
+                    "qualifier": "MGRS_COORDINATE",
+                    "value": "11SQV6212317342"
+                },
+                {
+                    "qualifier": "UTM_COORDINATE",
+                    "value": "11 N 762124 3917343"
+                }
+            ],
+            "keywords": [
+                "Business / Financial",
+                "economy",
+                "Construction"
+            ],
+            "owerproducer": "USA",
+            "classification": "U"
+        },
+        "geometry": [
+            {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -130.2890949,
+                            19.5468669
+                        ],
+                        [
+                            -97.9453449,
+                            19.5468669
+                        ],
+                        [
+                            -97.9453449,
+                            51.1874919
+                        ],
+                        [
+                            -130.2890949,
+                            51.1874919
+                        ],
+                        [
+                            -130.2890949,
+                            19.5468669
+                        ]
+                    ]
+                ]
+            },
+            {
+                "type": "Point",
+                "coordinates": [
+                    -86.5897,
+                    34.73539
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "ctpid": "BAH.SMTS.CASIE.F074FE4C34BC4B2EA59D3AACA9AF796B",
+            "title": "Change from VA to CA BFK IE 9/24/2013",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "dateposted": "2014-04-01T01:29:58Z",
+            "recorddate": "2014-04-01T04:29:58Z",
+            "publisher": [
+                {
+                    "name": "Consolidated Analytic Spatial Initiative (CASi)"
+                }
+            ],
+            "creator": [
+                {
+                    "name": "Betty",
+                    "surname": "Kelly",
+                    "affiliation": "KEYW"
+                }
+            ],
+            "virtualCoverage": [
+                {
+                    "address": "http://casidev01/gwr/posting/details.htm?id=F074FE4C34BC4B2EA59D3AACA9AF796B"
+                },
+                {
+                    "address": "http://casidev01/gwr/downloads/F074FE4C34BC4B2EA59D3AACA9AF796B/sailing-into-the-sunset-ms-judi.jpg"
+                }
+            ],
+            "subjectCoverage": [
+                {
+                    "qualifier": "GOUSE",
+                    "value": "Imagery"
+                },
+                {
+                    "qualifier": "NETWORK",
+                    "value": "JWICS"
+                },
+                {
+                    "qualifier": "CTP",
+                    "value": "CASi"
+                },
+                {
+                    "qualifier": "GOTYPE",
+                    "value": "Non-standard PRODUCT"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "climatologymeteorologyatmosphere"
+                },
+                {
+                    "qualifier": "MGRS_COORDINATE",
+                    "value": "11SNA2503553310"
+                },
+                {
+                    "qualifier": "UTM_COORDINATE",
+                    "value": "11 N 525035 4053310"
+                }
+            ],
+            "keywords": [
+                "Construction",
+                "climatologymeteorologyatmosphere",
+                "Corporate / Government"
+            ],
+            "owerproducer": "USA",
+            "classification": "U"
+        },
+        "geometry": [
+            {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -133.2421874,
+                            20.1023197
+                        ],
+                        [
+                            -100.1953124,
+                            20.1023197
+                        ],
+                        [
+                            -100.1953124,
+                            53.1491947
+                        ],
+                        [
+                            -133.2421874,
+                            53.1491947
+                        ],
+                        [
+                            -133.2421874,
+                            20.1023197
+                        ]
+                    ]
+                ]
+            },
+            {
+                "type": "Point",
+                "coordinates": [
+                    -86.5897,
+                    34.7543
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "ctpid": "BAH.SMTS.CASIE.7CB267ED72754464B98647EA659EF96E",
+            "title": "Changing Coordinates VA to CA",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "dateposted": "2014-04-06T09:29:58Z",
+            "recorddate": "2014-04-06T10:29:58Z",
+            "publisher": [
+                {
+                    "name": "Consolidated Analytic Spatial Initiative (CASi)"
+                }
+            ],
+            "creator": [
+                {
+                    "name": "Betty",
+                    "surname": "Kelly",
+                    "affiliation": "KEYW"
+                }
+            ],
+            "virtualCoverage": [
+                {
+                    "address": "http://casidev01/gwr/posting/details.htm?id=7CB267ED72754464B98647EA659EF96E"
+                },
+                {
+                    "address": "http://casidev01/gwr/downloads/7CB267ED72754464B98647EA659EF96E/sailing-into-the-sunset-ms-judi.jpg"
+                }
+            ],
+            "subjectCoverage": [
+                {
+                    "qualifier": "GOUSE",
+                    "value": "Imagery"
+                },
+                {
+                    "qualifier": "NETWORK",
+                    "value": "JWICS"
+                },
+                {
+                    "qualifier": "CTP",
+                    "value": "CASi"
+                },
+                {
+                    "qualifier": "GOTYPE",
+                    "value": "Non-standard PRODUCT"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "biota"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "environment"
+                },
+                {
+                    "qualifier": "MGRS_COORDINATE",
+                    "value": "18SWF5956238504"
+                },
+                {
+                    "qualifier": "UTM_COORDINATE",
+                    "value": "18 N 559562 4038504"
+                }
+            ],
+            "keywords": [
+                "Agriculture / Forestry / Food",
+                "biota",
+                "environment",
+                "Business / Financial"
+            ],
+            "owerproducer": "USA",
+            "classification": "U"
+        },
+        "geometry": [
+            {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -88.1718921,
+                            24.1874957
+                        ],
+                        [
+                            -60.0468921,
+                            24.1874957
+                        ],
+                        [
+                            -60.0468921,
+                            48.7968707
+                        ],
+                        [
+                            -88.1718921,
+                            48.7968707
+                        ],
+                        [
+                            -88.1718921,
+                            24.1874957
+                        ]
+                    ]
+                ]
+            },
+            {
+                "type": "Point",
+                "coordinates": [
+                    -86.5899,
+                    34.73548
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "ctpid": "BAH.SMTS.CASIE.0F173C040B8F44ACA3B3D6EA852DD991",
+            "title": "Are Coordinates Updating? First VA then CA",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "dateposted": "2014-04-03T09:29:58Z",
+            "recorddate": "2014-04-04T09:29:58Z",
+            "publisher": [
+                {
+                    "name": "Consolidated Analytic Spatial Initiative (CASi)"
+                }
+            ],
+            "creator": [
+                {
+                    "name": "Betty",
+                    "surname": "Kelly",
+                    "affiliation": "KEYW"
+                }
+            ],
+            "virtualCoverage": [
+                {
+                    "address": "http://casidev01/gwr/posting/details.htm?id=0F173C040B8F44ACA3B3D6EA852DD991"
+                },
+                {
+                    "address": "http://casidev01/gwr/downloads/0F173C040B8F44ACA3B3D6EA852DD991/sailing-into-the-sunset-ms-judi.jpg"
+                }
+            ],
+            "subjectCoverage": [
+                {
+                    "qualifier": "GOUSE",
+                    "value": "Imagery"
+                },
+                {
+                    "qualifier": "NETWORK",
+                    "value": "JWICS"
+                },
+                {
+                    "qualifier": "CTP",
+                    "value": "CASi"
+                },
+                {
+                    "qualifier": "GOTYPE",
+                    "value": "Non-standard PRODUCT"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "biota"
+                },
+                {
+                    "qualifier": "MGRS_COORDINATE",
+                    "value": "10SFA0838463738"
+                },
+                {
+                    "qualifier": "UTM_COORDINATE",
+                    "value": "10 N 608384 3563739"
+                }
+            ],
+            "keywords": [
+                "Agriculture / Forestry / Food",
+                "biota",
+                "Business / Financial"
+            ],
+            "owerproducer": "USA",
+            "classification": "U"
+        },
+        "geometry": [
+            {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -138.3750324,
+                            13.5703044
+                        ],
+                        [
+                            -105.3281574,
+                            13.5703044
+                        ],
+                        [
+                            -105.3281574,
+                            50.8359294
+                        ],
+                        [
+                            -138.3750324,
+                            50.8359294
+                        ],
+                        [
+                            -138.3750324,
+                            13.5703044
+                        ]
+                    ]
+                ]
+            },
+            {
+                "type": "Point",
+                "coordinates": [
+                    -86.5868,
+                    34.735491
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "ctpid": "BAH.SMTS.CASIE.C292F9B951834916B722C25767C93DC2",
+            "title": "Are the coordinates updating?",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "dateposted": "2014-04-02T14:40:58Z",
+            "recorddate": "2014-04-01T15:29:58Z",
+            "publisher": [
+                {
+                    "name": "Consolidated Analytic Spatial Initiative (CASi)"
+                }
+            ],
+            "creator": [
+                {
+                    "name": "Betty",
+                    "surname": "Kelly",
+                    "affiliation": "KEYW"
+                }
+            ],
+            "virtualCoverage": [
+                {
+                    "address": "http://casidev01/gwr/posting/details.htm?id=C292F9B951834916B722C25767C93DC2"
+                },
+                {
+                    "address": "http://casidev01/gwr/downloads/C292F9B951834916B722C25767C93DC2/flat,550x550,075,f.jpg"
+                }
+            ],
+            "subjectCoverage": [
+                {
+                    "qualifier": "GOUSE",
+                    "value": "Imagery"
+                },
+                {
+                    "qualifier": "NETWORK",
+                    "value": "JWICS"
+                },
+                {
+                    "qualifier": "CTP",
+                    "value": "CASi"
+                },
+                {
+                    "qualifier": "GOTYPE",
+                    "value": "Non-standard PRODUCT"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "climatologymeteorologyatmosphere"
+                },
+                {
+                    "qualifier": "http://gcmd.nasa.gov/User/difguide/iso_topics.html#ISO_TOPIC",
+                    "value": "environment"
+                },
+                {
+                    "qualifier": "MGRS_COORDINATE",
+                    "value": "11SLB1660453473"
+                },
+                {
+                    "qualifier": "UTM_COORDINATE",
+                    "value": "11 N 316605 4153473"
+                }
+            ],
+            "keywords": [
+                "Apparel / Leather / Wood",
+                "Distribution / Transportation / Logistics",
+                "climatologymeteorologyatmosphere",
+                "environment",
+                "Business / Financial"
+            ],
+            "owerproducer": "USA",
+            "classification": "U"
+        },
+        "geometry": [
+            {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -130.3242425,
+                            24.8554627
+                        ],
+                        [
+                            -107.8242425,
+                            24.8554627
+                        ],
+                        [
+                            -107.8242425,
+                            50.1679627
+                        ],
+                        [
+                            -130.3242425,
+                            50.1679627
+                        ],
+                        [
+                            -130.3242425,
+                            24.8554627
+                        ]
+                    ]
+                ]
+            },
+            {
+                "type": "Point",
+                "coordinates": [
+                    -86.5896,
+                    34.73552
+                ]
+            }
+        ]
+    }
+]

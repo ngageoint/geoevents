@@ -1,0 +1,12 @@
+ {% extends "./base.html" %}
+
+ {%block main-content%}
+ <div class="alert alert-error"><b>Warning:</b> you are about to delete a record.  This cannot be undone.</div>
+
+    <p><b>You are about to delete:</b> <a href="{{object.get_absolute_url}}">{{object}}</a></p>
+ 
+<form method='post' action='{{object.get_delete_url}}'>
+    {% csrf_token %}
+ <p><button class="btn btn btn-danger" type="submit">Delete</button></p></form>
+
+ {%endblock%}

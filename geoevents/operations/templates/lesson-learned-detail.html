@@ -1,0 +1,25 @@
+ {% extends "./base.html" %}
+
+ {%block main-content%}
+ {% load markup %}
+ 
+  <div class="page-header"><h1>{{item|truncatechars:60}}</h1></div>
+
+          <b>Created:</b> {{item.created|date:"d E Y H:i e" }}<br/>
+          <b>Assigned To: </b>{{item.assigned_to}}<br/>
+          <b>Priority:</b> {{item.priority}}<br/>
+          <b>Due:</b> {{item.due|date:"d E Y"}}<br/>
+          <b>Status:</b> {%ifequal item.status 1%}Active{%else%}Closed{%endifequal%}<br/>
+          <br/>
+          
+          <h4>Description:</h4>{{item.description|markdown|default:"<i>No Description Provided.</i>"}}
+          <h4>Work Around:</h4>{{item.work_around|markdown|default:"<i>No Work Around Provided.</i>"}}
+          <h4>Action:</h4> {{item.action|markdown|default:"<i>No Action Provided.</i>"}}
+          <h4>Resolution:</h4> {{item.resolution|markdown|default:"<i>No Resolution Provided.</i>"}}
+          <br/><br/>
+
+
+
+     {%if perms.operations.change_lessonlearned%}<a href="{{item.get_update_url}}" class="btn btn-primary"><i class="icon-pencil icon-white"></i> Edit</a>{% endif %} {%if perms.operations.delete_lessonlearned%}<a href="{{item.get_delete_url}}" class="btn btn-danger"><i class="icon-trash icon-white"></i> Delete</a>{% endif %}
+
+ {%endblock%}

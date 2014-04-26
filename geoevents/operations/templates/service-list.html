@@ -1,0 +1,39 @@
+ {% extends "./base.html" %}
+ {% load url from future %}
+ {%block javascript%}
+  <script type="text/javascript">
+		$(document).ready(function() {
+			$('.service_type').tooltip();
+		});
+ </script>
+ {%endblock%}
+ 
+ {%block main-content%}
+  <div class="page-header"><h1>Resources</h1></div>
+
+     <p>A catalog of resources that can be used to support special events and natural disasters.</p>
+
+     {%if perms.operations.add_service%}<a href="{% url 'operations-manage-service' %}" class="btn btn-mini btn-success"><i class="icon-plus icon-white"></i> Add New Resource</a><br/><br/>{% endif %}
+         <a name="services"/>
+	      <table class="table table-hover">
+              <tbody>
+			  <thead>
+                <tr>
+                  <th>Resource</th>
+                  <th>Date Added</th>
+                  <th>Service Types</th>
+                </tr>
+              </thead>
+              {% for item in items%}
+                <tr>
+                   <td><a href="{{item.get_absolute_url}}">{{item.name}}</a></td>
+				   <td>{{item.created}}</td>
+                  <td>{% for type in item.service_type.all%}
+						<a href="#" rel="tooltip" class="label label-info service_type" data-original-title="{{type.description}}" data-placement="bottom">{{type}}</a> 
+						{%endfor%}</td>
+                </tr>
+               {%endfor%} 
+              </tbody>
+      </table>
+     {% include "generic_paginator.html" %}
+ {%endblock%}

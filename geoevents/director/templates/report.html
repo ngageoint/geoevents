@@ -1,0 +1,21 @@
+ {% extends "./base.html" %}
+ {% load url from future %}
+
+ {%block main-content%}
+  <div class="page-header"><h1>{{report.title}} <small>{{note.last_updated}}</small></h1></div>
+              <tbody>
+				 
+ {% load markup %}
+                <tr>
+                  <td> <b>Title: </b>{{report.title}}<br/>
+                  <b>Posted By:</b> {{report.owner}}<br/>
+                  <b>Tags:</b> {{report.tags}}<br/>
+                  <b>Date Created:</b> {{note.created}}<br/>
+                  <b>Last Updated:</b> {{note.last_updated}}<br/><br/>
+                  <div class="well">{{note.details|markdown}}</div></td>
+                </tr>
+              </tbody>
+      </table>
+
+     {%if perms.report.change_report%}<a href="{% url 'reports-manage-report-id' report.id %}" class="btn btn-primary"><i class="icon-pencil icon-white"></i> Edit</a>{% endif %} {%if perms.report.delete_report%}<a href="{% url 'reports-delete-report-id' report.id %}" class="btn btn-danger"><i class="icon-trash icon-white"></i> Delete</a>{% endif %}
+ {%endblock%}

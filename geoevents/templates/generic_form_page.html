@@ -1,0 +1,17 @@
+ {% extends "./base.html" %}
+ {% load build_form %}
+ {% block title %}: {{ page_header }}{% endblock %}
+ {%block main-content%}
+  <div class="page-header"><h1>{{ page_header }}</h1></div>
+
+   {% block subheader %}{% endblock %}
+
+  <form method="post" action=".">
+      {% csrf_token %}
+      {% build_form form %}
+      <input class="btn" type="submit" value="Save" data-role="button" />
+      {% block extra_buttons%}{% endblock %}
+  </form>
+
+
+{%endblock%}

@@ -1,0 +1,78 @@
+#map_canvas {
+    height: 500px;
+    width: 100%;
+}
+.navbar .container { min-height: 83px; }
+
+
+.navbar-fixed-top {
+    position:static;
+    margin-bottom:10px;
+}
+
+.big-number{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.right-border{
+    border-right: 2px;
+    border-color: #999999;
+}
+/*  TODO: Refactor duplicate classes  */
+.incident-box li a {
+    color: #333333;
+    cursor: pointer;
+}
+
+.list-img{
+    float: left;
+    margin-top:3px;
+    padding-right: 3px;
+}
+
+.incident-box li:hover a {
+    text-decoration: none;
+    color: #999999;
+}
+
+.side-box li a {
+    color: #333333;
+    cursor: pointer;
+}
+
+.side-box li:hover a {
+    text-decoration: none;
+    color: #999999;
+}
+
+.sub-item{
+    font-size: 12px;
+    margin-top: -2px;
+    }
+
+.title {
+    line-height: 18px;
+    border-bottom: 1px solid #DDDDDD !important;
+    padding-bottom: 9px;
+    font-size: 20px;
+}
+
+ul{
+    list-style-type: none;
+    margin-left: 6px;
+    line-height: 18px;
+    padding: 3px;
+}
+
+.side-box{
+    border-bottom: 1px;
+    border-bottom-color: #DDDDDD;
+    border-bottom-style: solid;
+    padding: 8px 0 8px 0;
+}
+
+.side-box li{
+    padding-top:3px;
+}

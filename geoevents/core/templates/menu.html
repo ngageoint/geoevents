@@ -1,0 +1,68 @@
+{% load static %}
+{% load url from future %}
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    {% include "classification.html" with classification=classification %}
+
+    <div class="navbar-inner">
+        {% block menu %}
+            <div class="container-fluid">
+                <img class="pull-left" src="{% get_static_prefix %}images/storm.png" height="35px" width="35px" style="padding: 3px 6px 3px 3px; margin-left:-17px; "/>
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="{%url 'home' %}">{% block brand %}Geo Event Pages{% endblock %}</a>
+
+                <div class="btn-group pull-right">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="icon-user"></i> {{request.user.username}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_staff%}
+                                <li><a href="{% url 'admin:index' %}" target="_blank">Admin Site</a></li>
+                                <li class="divider"></li>
+                            {% endif %}
+                            <li><a href="{% url 'user-profile' request.user.username %}">My Profile</a></li>
+                            <li><a href="{% url 'logout' %}">Sign Out</a></li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}">Sign In</a></li>
+                        {% endif%}
+                    </ul>
+                </div>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        {%for key,value in menu_items.items%}
+                            {%if not value.dropdown%}
+                                <li class="{% if value.active %}active{% endif%}"><a href="{{value.url}}"  {% if value.target %}target="{{ value.target }}"{% endif %} >{{key}}</a></li>
+                            {%else%}
+                                <li class="dropdown {%if value.active%}active{%endif%}">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        {{key}}
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        {%for k,v in value.dropdown.items%}
+                                            {% if k == "break" %}
+                                                <li class="divider"></li>
+                                            {% else %}
+                                                <li><a href="{{v.url}}" {% if v.target %}target="{{ v.target }}"{% endif %}>{{k}}</a></li>
+                                            {% endif %}
+                                        {%endfor%}
+                                    </ul>
+                                </li>
+                            {%endif%}
+                        {%endfor%}
+
+                        <li id="navbar-additions"></li>
+
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        {% endblock %}
+    </div>
+</div>

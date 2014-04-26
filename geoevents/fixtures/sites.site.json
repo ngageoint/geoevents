@@ -1,0 +1,28 @@
+[
+    {
+        "pk": 1, 
+        "model": "sites.site", 
+        "fields": {
+            "domain": "your.mainsite.com",
+            "name": "App 01 - /django"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "sites.site", 
+        "fields": {
+            "domain": "your.mainsite.com/geoevents-test",
+            "name": "App 01 - /geoevents-test"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "sites.site", 
+        "fields": {
+            "domain": "localhost:8000", 
+            "name": "localhost"
+        }
+    }
+
+
+]

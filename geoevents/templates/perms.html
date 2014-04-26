@@ -1,0 +1,20 @@
+{% extends "./base.html" %}
+{% load url from future %}
+
+ {%block main-content%}
+  <div class="page-header"><h1>Account Information - {{ username }}</h1></div>
+    <p class="muted">Use this form to populate your user information.</p>
+     <form method="post" action="{% url 'user-profile' username %}">{% csrf_token %}
+
+         <table>
+             {{form}}
+         </table>
+         <br/><input type="submit" value="Save" data-role="button" class="btn btn-default btn-small"></input> {%if form.pk%}<a href="{{delete_url}}" class="btn btn-small btn-danger"><i class="icon-trash icon-white"></i> Delete</a>{%endif%}
+     </form>
+     <h4>Groups:</h4>
+     <p class="muted">User permissions are based on group membership.  Below are the groups that you are a member of, <a href="{% url 'add-feedback' %}">click here</a> to request access to a group.</p>
+     {% for k,v in groups %}
+         <b>{{ k }}:</b> <span class="label label-{% if v == "Member" %}success{% else %}warning {% endif %}">{{ v }}</span><br/>
+     {% endfor %}
+ {%endblock%}
+

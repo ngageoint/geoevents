@@ -1,0 +1,14 @@
+ {% extends "base.html" %}
+ 
+
+ {%block main-content%}
+  <div class="page-header"><h1>{{form.title.value|default_if_none:"Add a Note"}} <small>{{item.last_updated}}</small></h1></div>
+  <form method="post" action=".">{% csrf_token %}
+
+<table>
+  {{form}}
+</table>
+<br/><br/><input type="submit" value="Save" data-role="button" class="btn btn-default btn-small"></input> {%if form.pk%}<a href="{{delete_url}}" class="btn btn-small btn-danger"><i class="icon-trash icon-white"></i> Delete</a>{%endif%}
+</form> 
+
+{%endblock%}

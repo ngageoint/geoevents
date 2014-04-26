@@ -1,0 +1,115 @@
+{% extends "./base.html"%}
+
+{% block title %}{{ item.name }} Event Page {% endblock %}
+
+{% block brand %}Fullscreen: {{ item.name }}{% endblock %}
+
+{% load markup%}
+
+{% block css %}
+<link href="{{ STATIC_URL }}css/incident.css" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/>
+<link href="{{STATIC_URL}}timeline/timeline.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascript %}
+  {% include "incident-libraries.html" %}
+
+
+<script type="text/javascript">
+
+var settings = {};
+
+$(document).ready(function() {
+    //TODO: Need a better way to manage layer css within IE
+    if ($ && $.browser && $.browser.msie){
+        $('.span12').css('margin-left','0px');
+        $('.span9').css('margin-left','0px');
+    }
+
+    var event = {};
+
+    event.fullScreenMap = true;
+    event.incidentIcon = '{%ifequal item.event_type "Hurricane/Cyclone"%}{{STATIC_URL}}images/hurricane_cyclone.png{%else%}{{STATIC_URL}}images/{{item.event_type|lower}}.png{%endifequal%}';
+    event.products = [];
+    event.urlLessonsLearned = "{% url "api_dispatch_list" CURRENT_API_VERSION "lesson-learned" %}?format=json";
+    event.longitude = {{item.longitude}};
+    event.latitude = {{item.latitude}};
+    event.id = {{item.id}};
+    event.mapServices = {{item.map.map_layers_json|safe}};
+    event.productFeed = "{{item.product_feed|safe}}";
+    event.productFeedStd = "{{item.standard_product_url|safe}}";
+    event.created = '{{ item.created }}';
+    event.closed = '{{ item.closed }}';
+    event.lastUpdated = '{{ item.last_updated }}';
+    event.tags = {% if item.tags_as_list %}[{%for tag in item.tags_as_list%}'{{tag}}',{%endfor%}'']{%else%}[]{%endif%};
+    event.name = '{{item.name}}';
+    event.slug = '{{item.slug}}';
+    event.eventType = '{{item.event_type}}';
+    event.posture = '{{item.posture}}';
+    event.link = '{{ item.link }}';
+    event.collaborationLink = '{{ item.collaboration_link }}';
+    event.status = '{{ item.status }}';
+    event.map = {{ item.map.map_json|safe }};
+    event.timelineID = 'event_timeline';
+    event.rfiFeed = '{{item.rfi_feed|safe}}';
+    event.rfisID = 'rfis';
+    event.rfiCatsToCount = ['Not Verified','In Progress','Completed'];
+    event.rfiSubtextID = 'rfi_subtext';
+    event.timelineItems = {{ item.timeline_items_json|safe }};
+    event.allowClicksForInfo = (document.location.hostname!='localhost');
+    event.fullScreenLink = '{% url "operations-view-full-incident" item.id %}';
+    event.normalScreenLink = '{% url "operations-view-incident" item.id %}';
+    event.brandingLogo = '{{SITE_BRANDING_LOGO}}';
+    event.brandingTitle = '{{SITE_TITLE}}';
+    event.staticRoot = '{{STATIC_URL}}';
+
+    event_pages.options.staticRoot = '{{STATIC_URL}}';
+
+    event.fileDir = '{{item.filedropoff_path}}';
+    event.files = {% if item.filedropoff_path %}{{ item.files_in_dropoff_folder|safe}}{%else%}[]{%endif%};
+    event.gqProjectIDs = '{{item.gq_project_ids}}';
+    event.gqJobIDs = '{{item.gq_job_ids}}';
+    event.deployments = {{ item.deployments_json|safe }};
+    event.location = '{{item.event_location}}';
+
+    settings = {{settings|safe}};
+    settings = event_pages.turnSettingsIntoObject(settings);
+    settings.page_title_addition = ': {{ item.name }}';
+
+    event.geoWidgets = {{ item.geowidgets_json|safe|default:'[]' }};
+
+    if (event_pages.isLocal()){
+        //NOTE: Uses test RFI and SMTS feed for local testing
+        event.rfiFeed = '/static/test_list_rfis.json';
+        event.productFeed = '/static/test_list_smts.xml'
+    }
+
+    if ($.browser.chrome || $.browser.firefox){
+        $("#map_holder").css({paddingTop:'0px'});
+    }
+
+    incident_support.init(event);
+
+});
+
+</script>
+{% endblock %}
+
+
+
+
+{% block main-content %}
+<!--Beginning of Main column-->
+<div class="span12" style="padding-top: 65px" id="map_holder">
+
+    <!--Map-->
+    <div class="row-fluid">
+        <div class="thumbnail">
+            <div id="map_canvas"></div>
+            <div id="map_coords"></div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

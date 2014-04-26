@@ -1,0 +1,34 @@
+ {% extends "./base.html" %}
+ {% load url from future %}
+
+ {%block content%}
+    <div class="container-narrow main-content" style="padding-top:10px">
+     <div class="page-header"><h1>FAQs</h1></div>
+
+     <br/>
+     <div class="span6">
+
+        <!-- Common Issues -->
+       <ul class="nav nav-tabs nav-stacked">
+           <li class="active" style="font-weight: bold; background-color: #dddddd;"><a href="#">Common Issues</a></li>
+           {% for i in common_issues %}
+            <li><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></li>
+           {% endfor %}
+       </ul>
+
+        <br/>
+       <!-- Questions by Category -->
+       {% regroup categories by category as categories_list %}
+        {% for category in categories_list %}
+
+
+       <h5 class="page-header">{{category.grouper}}</h5>
+            {% for item in category.list %}
+                <li><a href="{{ item.get_absolute_url }}">{{ item }}</a></li>
+            {% endfor %}
+       <br/>
+       {% endfor %}
+       {%if perms.feedback.add_article%}<a href="{%url 'feedback-manage-article' %}" class="btn btn-mini btn-success"><i class="icon-plus icon-white"></i> Add New FAQ</a>{% endif %}
+     </div>
+    </div>
+ {%endblock%}

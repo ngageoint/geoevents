@@ -1,0 +1,31 @@
+ {% extends "./base.html" %}
+ {% load url from future %}
+
+ {%block main-content%}
+  <div class="page-header"><h1>{{events_list|length}} SitRep{{events_list|pluralize}}</h1></div>
+  {%if perms.operations.add_sitrep%}<a href="{%url 'operations-manage-sitrep' %}" class="btn btn-mini btn-success"><i class="icon-plus icon-white"></i> Add New SitRep</a>{% endif %}
+  <table class="table table-hover">
+	<thead>
+		<tr>
+		  <th>Name</th>
+		  <th>Date Added</th>
+		  <th>Event</th>
+		  <th>Owner</th>
+		</tr>
+	</thead>
+    <tbody>
+	{% for item in events_list %}
+		<tr>
+			<td><a href="{{item.get_absolute_url}}">{{item.name}}</a></td>
+			<td>{{item.created}}</td>
+			<td><a href="{{item.event.get_absolute_url}}">{{item.event}}</a></td>
+			<td>{{item.owner}}</td>
+			<td>{%if perms.operations.change_sitrep%}<a href="{%url 'operations-manage-sitrep-pk' item.id%}" class="btn btn-mini btn-primary"><i class="icon-pencil icon-white"></i> Edit</a>{%endif%} </td>
+		</tr>
+	{% endfor %}
+    </tbody>
+ </table>
+              
+ {% include "generic_paginator.html" %}
+ 
+ {%endblock%}

@@ -1,0 +1,157 @@
+div.widget_holder {
+    max-height: 350px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 4px;
+}
+.landing-page-header a.btn{
+    margin: 1px;
+    opacity: 0.8;
+}
+.dataTables_scrollHeadInner th {
+    font-size: 10px;
+}
+.highlightBorder {
+    border: 3px dashed green;
+}
+.drag {
+    position: absolute;
+    border: 1px solid #89B;
+    background: #BCE;
+    height: 58px;
+    width: 58px;
+    top: 120px;
+    overflow: hidden;
+    cursor: move;
+}
+
+.modal .modal-body > textarea {
+    height: 200px;
+    width: 95%;
+}
+
+
+.draggable {
+    cursor: move;
+}
+.dropped {
+    background: #BCE;
+}
+
+.report.not_public {
+    background-color: #fee;
+}
+.report {
+    font-size:.8em;
+    background-color: #eef;
+    border-radius: 4px;
+    margin:2px;
+}
+.report .title {
+    font-weight: bold;
+}
+.report .posted_by {
+    font-size: .8em;
+    font-style: italic;
+}
+
+.dataTables_scrollBody .details {
+    background-color: #eef;
+}
+.dataTables_scrollBody {
+    cursor: pointer;
+}
+
+.landing-page-header {
+    margin-bottom: 2px;
+    background-color: #dfeffc;
+    border-radius: 4px;
+    padding-left: 6px;
+    padding-bottom: 4px;
+}
+.note {
+    border-radius: 8px;
+    padding:4px;
+    margin: 2px;
+    background-color:#E3D5FC;
+}
+.note_even {
+    background-color:#E6C8E0;
+}
+.note .title {
+    font-size:14px;
+    font-weight:bold;
+}
+.note .content {
+    display: block;
+}
+.note .posted_by {
+    font-size:9px;
+    float:right;
+    text-align:left;
+    font-weight:bold;
+}
+.note .posted_date {
+    font-size:9px;
+    float:right;
+    font-style: italic
+}
+
+.horizontalLinkHolder {
+    white-space: nowrap;
+    overflow-x: auto;
+}
+.horizontalLinkHolder .link {
+    background-color: #ffe;
+    border-radius: 4px;
+    border: 1px solid gold;
+    line-height: 100%;
+    letter-spacing: -0.2px;
+    margin-right: 1px;
+    padding: 3px 1px 3px 1px;
+    min-width: 26px;
+    max-width: 44px;
+    height: 28px;
+    font-size: 9px;
+    font-family: arial, helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+.horizontalLinkHolder .link:hover {
+    background-color: #ffa;
+}
+.horizontalLinkHolder .category {
+    background-color: #eed;
+    text-align: center;
+    margin:1px;
+    font-size: 11px;
+    font-family: arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
+}
+
+body{
+    scrollbar-face-color: #000000;
+    scrollbar-shadow-color: #2D2C4D;
+    scrollbar-highlight-color:#7D7E94;
+    scrollbar-3dlight-color: #7D7E94;
+    scrollbar-darkshadow-color: #2D2C4D;
+    scrollbar-track-color: #7D7E94;
+    scrollbar-arrow-color: #C1C1D1;
+}

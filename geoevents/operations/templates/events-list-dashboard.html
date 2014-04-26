@@ -1,0 +1,222 @@
+ {% extends "./base.html" %}
+ {% block title %}: Active Events{% endblock %}
+ {% load url from future  %}
+
+ {% block css %}
+ <link href="{{ STATIC_URL }}css/events-list-dashboard.css" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/>
+ <link href="{{STATIC_URL}}timeline/timeline.css" rel="stylesheet">
+ <style>
+     div.olControlAttribution {
+         bottom: 5px;
+         color: #f2cf31;
+         font-weight: bold;
+     }
+ </style>
+ {% endblock %}
+
+
+ {% block javascript%}
+ <script type="text/javascript" src="{{STATIC_URL}}js/jquery.cookie.js"></script>
+ <script type="text/javascript" src="{{STATIC_URL}}js/jquery.ba-bbq.min.js"></script>
+ <script type="text/javascript" src="{{STATIC_URL}}js/moment.min.js"></script>
+
+ <script type="text/javascript" src="{{STATIC_URL}}js/dashboard-support.js"></script>
+ <script type="text/javascript" src="{{STATIC_URL}}js/layer-parsers.js"></script>
+ <script type="text/javascript" src="{{STATIC_URL}}js/layer-builder.js"></script>
+ <script type="text/javascript" src="{{STATIC_URL}}js/layer-handler.js"></script>
+ <script type="text/javascript" src="{{STATIC_URL}}js/layer-buttons.js"></script>
+ <script type="text/javascript" src="{{STATIC_URL}}js/layer-categories.js"></script>
+ <script type="text/javascript" src="{{STATIC_URL}}js/jsmaptools.js"></script>
+
+
+
+     <script type="text/javascript">
+         var settings = [];
+
+         $(document).ready(function() {
+             //TODO: Need a better way to manage layer css within IE
+             if ($ && $.browser && $.browser.msie){
+                 $('.span12').css('margin-left','0px');
+                 $('.span9').css('margin-left','0px');
+             }
+
+             var event = {};
+             event.mapServices = {{map.map_layers_json|safe}};
+             event.map = {{map.map_json|safe}};
+             event.staticRoot = '{{STATIC_URL}}';
+             event_pages.options.staticRoot = '{{STATIC_URL}}';
+             event_pages.options.root = '{% url "home" %}';
+             event.fullScreenLink = '{% url "operations-view-full-dashboard" %}';
+             event.normalScreenLink = '{% url "active-incidents" %}';
+
+             settings = {{settings|safe}};
+             settings = event_pages.turnSettingsIntoObject(settings);
+             settings.page_title_addition = ': Active Events';
+
+             dashboard_support.init(event);
+
+             if (dashboard_support.map){
+                 dashboard_support.map.baseLayer.wrapDateLine=false;
+             }
+
+             if ($.browser && $.browser.msie && !settings.hideIEPopup) {
+                 //IE Popup warning
+                 var majorVersion = 1.0*($.browser.version.split(".")[0]);
+                 var modal = "No";
+                 if(majorVersion == 7){
+                     /*  modalIEWindow has a message telling the user to click "No" when they are
+                      prompted if they would like to only show secure content. This is appropriate
+                      for IE8+ but if the user is using IE7 the pop-up asks the user if they would
+                      like to display secure and non-secure content so the correct answer is 'Yes.' */
+                     modal = "Yes";
+                     if (document.documentMode && document.documentMode==7) modal="No";
+                 }
+                 $("#modalIEWindowAnswer").html(modal);
+
+                 if ($.cookie('ie_dont_show_popup')!='nevermore'){
+                     $('#modalIEWindow').modal();
+                     $('#popup_ie_nevershow').click(function(){
+                         $.cookie('ie_dont_show_popup', 'nevermore');
+                         $('#modalIEWindow').modal('hide');
+                     });
+                 }
+             } else if (document.getElementById('files')) {
+                 document.getElementById('files').addEventListener('change', handleFileSelect, false);
+             }
+
+         });
+
+     </script>
+ {% endblock %}
+
+    {% block content %}
+     <div class="container-fluid">
+
+         <div class="row-fluid">
+
+             <div class="span12">
+                 <!--Header-->
+                 <div class="header">
+                     <div class="page-header"><h2 id='active_header'>Active Events Page</h2></div>
+                 </div>
+                 <!--<div class="page-header"><h1>{{items|length}} Active Event{{items|pluralize}}</h1></div>-->
+
+                     <div class="row-fluid" style="margin-top: 15px;">
+                         <div class="thumbnail span10" id="map_detail_holder" style='margin:10px 0px 0px'>
+
+                             <div id="map_canvas"></div>
+                             <div><span id="map_coords"></span><span id="map_dtg" style="float:right"></span></div>
+                         </div>
+                         <div class="span2" style='margin:10px 0px 0px 10px;padding:0px;'>
+                             <div class="side-box">
+                                 <span class="big-number">{{ items|length }}</span> Active Events <br/>
+                                 <span class="big-number">{{ ative_deployments|length }}</span> Active Deployments
+                             </div>
+
+                            <div class="side-box" style='max-height: 300px; overflow: auto;'>
+                              <span id='sitrep_holder'>Latest Sitreps:</span>
+                              {% if latest_sitreps %}
+                                 <ul>
+                                 {% for sitrep in latest_sitreps %}
+                                     <li id="sitrep_{{ sitrep.id }}">
+                                        <a href="{{ sitrep.get_absolute_url }}">
+                                         <span style="height: 100%">
+                                             <i class="icon-file list-img"></i>
+                                         </span>
+                                         <span style="display: block; overflow: hidden;"><b>{{ sitrep.name }}</b>
+                                         <p class="sub-item" style="display: block">{{ sitrep.created }}</p></span>
+
+                                        </a>
+                                     </li>
+                                 {% endfor %}
+                                 </ul>
+                              {% else %}
+                                 <span>  <b>No Sitreps found.</b></span>
+                              {% endif %}
+                            </div>
+
+                             {% if perms.operations.add_event %}
+                             <div class="side-box">
+                                 <a class="btn btn-mini" href="{% url 'operations-manage-incident' %}"><i class="icon-plus"></i> Create New Event</a>
+                             </div>
+                             {% endif %}
+                        </div>
+                     </div>
+
+                    <!-- Active Incidents -->
+
+                     <div class="row-fluid" style="margin-top: 15px;">
+                         <div class="span4 incident-box right-border">
+                             <h3 class="title">Events we are working</h3>
+                             {% if active %}
+                                 <ul>
+                                     {% for item in active %}
+                                         <li id="event_{{ item.id }}"><a href="{{ item.get_absolute_url }}"><i class="list-image icon-circle-arrow-right"></i> {{ item.name }}</a></li>
+                                     {% endfor %}
+                                 </ul>
+                             {% else %}
+                                 <p>No active incidents.</p>
+                             {% endif %}
+                         </div>
+
+                        <!-- Monitored Events -->
+
+                             <div class="span4 incident-box">
+                                 <h3 class="title">Events we are monitoring</h3>
+                                 {% if monitoring %}
+                                     <ul>
+                                         {% for item in monitoring %}
+                                             <li id="event_{{ item.id }}"><a href="{{ item.get_absolute_url }}"><i class="list-image icon-circle-arrow-right"></i> {{ item.name }}</a></li>
+                                         {% endfor %}
+                                     </ul>
+                                 {% else %}
+                                     <p>No monitored events.</p>
+                                 {% endif %}
+                             </div>
+
+                         <!-- Exercises Events -->
+
+                         <div class="span4 incident-box">
+                             <h3 class="title">Exercises and Special Events</h3>
+                             {% if low_priority_events %}
+                                 <ul>
+                                     {% for item in low_priority_events %}
+                                         <li id="event_{{ item.id }}"><a href="{{ item.get_absolute_url }}"><i class="list-image icon-circle-arrow-right"></i> {{ item.name }}</a></li>
+                                     {% endfor %}
+                                 </ul>
+                             {% else %}
+                                 <p>No active exercises.</p>
+                             {% endif %}
+                         </div>
+                     </div><!--/row-->
+
+             </div>
+         </div>
+
+     </div>
+
+     <script type="text/javascript">
+         var events = [];
+         {% for item in items %}
+             events.push({
+                 type: '{{ item.event_type }}', id: '{{item.id}}', name: '{{item.name}}', location: '{{item.location}}',
+                 tags: '{{item.tags}}', created: '{{item.created}}', updated: '{{item.lastUpdated}}',
+                 icon: '{%ifequal item.event_type "Hurricane/Cyclone"%}{{STATIC_URL}}images/hurricane_cyclone.png{%else%}{{STATIC_URL}}images/{{item.event_type|lower}}.png{%endifequal%}',
+                 description: '{{item.description_js_readable|safe}}',
+                 gqProjectIDs: '{{item.gq_project_ids}}', gqJobIDs: '{{item.gq_job_ids}}', status: '{{item.status}}'
+             });
+             {%endfor%}
+
+         var sitreps = [];
+         {% for sitrep in latest_sitreps %}
+             sitreps.push({
+                 id:'{{sitrep.id}}', name:'{{sitrep.name}}', created:'{{sitrep.created}}', url:'{{sitrep.get_absolute_url}}'
+             });
+         {%endfor%}
+     </script>
+
+    {% endblock %}
+
+
+
+

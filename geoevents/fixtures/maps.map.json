@@ -1,0 +1,44 @@
+[
+{
+  "pk": 1, 
+  "model": "maps.map", 
+  "fields": {
+    "last_updated": "2012-12-05T14:36:32.712Z", 
+    "projection": "", 
+    "title": "Base Map", 
+    "created": "2012-12-05T14:36:32.712Z", 
+    "zoom": 3, 
+    "center_x": 0.0, 
+    "center_y": 0.0, 
+    "description": "Generic map for incidents"
+  }
+},
+{
+  "pk": 5, 
+  "model": "maps.map", 
+  "fields": {
+    "last_updated": "2012-12-07T14:08:24.334Z", 
+    "projection": "", 
+    "title": "Hurricane Base Map", 
+    "created": "2012-12-07T14:08:24.334Z", 
+    "zoom": 8, 
+    "center_x": 0.0, 
+    "center_y": 0.0, 
+    "description": "Generic map for hurricane incidents."
+  }
+},
+{
+  "pk": 10, 
+  "model": "maps.map", 
+  "fields": {
+    "last_updated": "2013-02-15T13:38:39.663Z", 
+    "projection": "", 
+    "title": "Dashboard", 
+    "created": "2013-02-15T13:38:39.663Z", 
+    "zoom": 25, 
+    "center_x": 0.0, 
+    "center_y": 0.0, 
+    "description": "Dashboard Map"
+  }
+}
+]
