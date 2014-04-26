@@ -43,7 +43,7 @@ Installation
 
 Cloud Installation::
 
-1. You can optionally deploy geoq with all dependencies to a Virtual Machine or a cloud VM (such as an Amazon Web Services EC2 box) by using the chef installer at [https://github.com/ngageoint/geoq-chef-installer](https://github.com/ngageoint/geoq-chef-installer)
+1. You can optionally deploy geoevents with all dependencies to a Virtual Machine or a cloud VM (such as an Amazon Web Services EC2 box) by using the chef installer at [https://github.com/ngageoint/geoevents-chef-installer](https://github.com/ngageoint/geoevents-chef-installer)
 
 2. Chef scripts are our preferred method of automating cloud builds
 
