@@ -3,19 +3,20 @@ Geo-Events
 
 #### Geographic Event tracking and data management system ####
 
-Geo-Events is a geographic web platform that enables tracking geographical events (e.g. Hurricanes, Tornados, Floods) and organizing geographic event information through web services.
+Geo-Events is a geographic knowledge management platform that gives users a common operating picture for tracking events such as hurricanes, tornados, floods, etc.
 
 The Geo-Events software was developed at the National Geospatial-Intelligence Agency (NGA) as a joint effort between NGA and The MITRE Corporation. The government has "unlimited rights" and is releasing this software to increase the impact of government investments by providing developers with the opportunity to take things in new directions.  You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.  NGA assumes no responsibility for the use of the software by any parties, and makes no guarantees, expressed or implied, about the software quality, reliability, or any other characteristic.  The Geo-Events software can be redistributed and/or modified freely provided that any derivative work bears the following notice: "Elements of this work contain Geo-Events: The National Geospatial-Intelligence Agency and The MITRE Corporation jointly produced this work."
 
-### Pull requests
+### Pull requests ###
 
 If you'd like to contribute to this project, please make a pull request. We'll review the pull request and discuss the changes. By submitting a pull request you agree to keep this work free of restrictions.  You are free to fork this project and add unique elements with your own stipulations in another repository or platform, but this version shall remain free of restrictions.
 
-###In the News
+###In the News###
 NGA Director Letitia Long talks about NGA's GitHub initiative and our first offerings, GeoQ and Geo-Events, at the GEOINT Symposium.  Her comments start at 40 minutes and 40 seconds in the [video clip] (http://geointv.com/archive/geoint-2013-keynote-letitia-a-long/).
 
 
 ###This project realies heavily on open source packages and uses:###
+
 Django under [BSD] (https://github.com/django/django/blob/master/LICENSE)
 
 OpenLayers under [FreeBSD] (https://raw.githubusercontent.com/openlayers/openlayers/master/license.txt)
