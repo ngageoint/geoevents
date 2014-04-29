@@ -207,20 +207,23 @@ dashboard_support.configureMap=function(){
         var lonlat = map.getLonLatFromPixel(position);
         var text = "";
         if (position && lonlat && lonlat.lat && typeof maptools!="undefined" && maptools.inWorldBounds(lonlat.lat, lonlat.lon)){
-            text = "Lat: " + lonlat.lat.toFixed(6) + " , Lon: "+lonlat.lon.toFixed(6);
+            var lat = lonlat.lat;
+            var lng = lonlat.lon || 0;
+            lng = maptools.correctDegree(lng);
 
+            text = "Lat: " + lat.toFixed(6) + " , Lon: "+lng.toFixed(6);
             var ngText = '';
+            var usngCoords = maptools.latLongToUsng(lat, lng, 5);
+            var usngText = usngCoords.usngString;
+
             if (maptools.inUSBounds(lonlat)) {
-                ngText += " , USNG: "+maptools.latLongToUsng(lonlat.lat, lonlat.lon,3);
+                ngText += ", USNG: "+usngText;
             } else {
-                ngText += " , MGRS: "+maptools.latLongToMgrs(lonlat.lat, lonlat.lon,3);
+                ngText += ", MGRS: "+usngText;
             }
             if (ngText && ngText.indexOf && ngText.indexOf('NaN')>0) ngText='';
             text += ngText;
             if (map.zoom) text += ", Zoom: "+map.zoom;
-
-        } else {
-            text = "X: "+lonlat.lon+", Y: "+lonlat.lat;
         }
 //TODO: work with multiple projections:
 //        var ll = map.getLonLatFromPixel(event.xy).transform(new OpenLayers.Projection('EPSG:900913'), new OpenLayers.Projection('EPSG:28993'));

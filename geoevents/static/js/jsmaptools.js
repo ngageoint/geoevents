@@ -559,7 +559,7 @@
             // Constrain reporting USNG coords to the latitude range [80S .. 84N]
             /////////////////
             if (lat > 84.0 || lat < -80.0){
-                return(UNDEFINED_STR);
+                return([]);
             }
             //////////////////////
 
