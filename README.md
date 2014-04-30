@@ -11,6 +11,8 @@ The Geo-Events software was developed at the National Geospatial-Intelligence Ag
 
 If you'd like to contribute to this project, please make a pull request. We'll review the pull request and discuss the changes. By submitting a pull request you are dedicating your work to the public domain.  You are free to fork or download this project and add unique elements with other stipulations in another repository, platform, or private development space, but this living version shall remain free of restrictions within the public domain.  
 
+Software source code previously released under an open source license and then modified by NGA staff is considered a "joint work" (see 17 USC § 101); it is partially copyrighted, partially public domain, and as a whole is protected by the copyrights of the non-government authors and must be released according to the terms of the original open source license.
+
 ###In the News###
 NGA Director Letitia Long talks about NGA's GitHub initiative and our first offerings, GeoQ and Geo-Events, at the GEOINT Symposium.  Her comments start at 40 minutes and 40 seconds in the [video clip] (http://geointv.com/archive/geoint-2013-keynote-letitia-a-long/).
 
