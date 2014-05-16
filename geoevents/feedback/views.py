@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect, get_object_or_404
 from geoevents.core.views import PageHeaderMixin, MessagesModelFormMixin
 from geoevents.feedback.forms import ArticleForm, FeedbackForm
-from geoevents.feedback.models import Category, Article
+from geoevents.feedback.models import Category, Article, SubjectEmailMap
 from geoevents.operations.views import FormParametersFromGetParamsMixin
 
 
