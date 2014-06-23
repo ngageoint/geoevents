@@ -1,9 +1,9 @@
-Geo-Events
+GeoEvents
 =======
 
 #### Geographic Event tracking and data management system ####
 
-Geo-Events is a geographic-oriented knowledge management platform that gives users a common operational picture for tracking events such as hurricanes, tornadoes, floods, etc.  The tasking elements of [GeoQ]  (https://github.com/ngageoint/geoq) work well with the organizational functionality of Geo-Events.    
+GeoEvents is a geographic-oriented knowledge management platform that gives users a common operational picture for tracking events such as hurricanes, tornadoes, floods, etc.  The tasking elements of [GeoQ]  (https://github.com/ngageoint/geoq) work well with the organizational functionality of Geo-Events.    
 
 The GeoEvents software was developed at the National Geospatial-Intelligence Agency (NGA) in collaboration with [The MITRE Corporation] (http://www.mitre.org).  The government has "unlimited rights" and is releasing this software to increase the impact of government investments by providing developers with the opportunity to take things in new directions. The software use, modification, and distribution rights are stipulated within the [MIT] (http://choosealicense.com/licenses/mit/) license.  
 
