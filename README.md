@@ -3,7 +3,7 @@ GeoEvents
 
 #### Geographic Event tracking and data management system ####
 
-GeoEvents is a geographic-oriented knowledge management platform that gives users a common operational picture for tracking events such as hurricanes, tornadoes, floods, etc.  The tasking elements of [GeoQ]  (https://github.com/ngageoint/geoq) work well with the organizational functionality of Geo-Events.    
+GeoEvents is a geographic-oriented knowledge management platform that gives users a common operational picture for tracking events such as hurricanes, tornadoes, floods, etc.  The tasking elements of [GeoQ]  (https://github.com/ngageoint/geoq) work well with the organizational functionality of GeoEvents.    
 
 The GeoEvents software was developed at the National Geospatial-Intelligence Agency (NGA) in collaboration with [The MITRE Corporation] (http://www.mitre.org).  The government has "unlimited rights" and is releasing this software to increase the impact of government investments by providing developers with the opportunity to take things in new directions. The software use, modification, and distribution rights are stipulated within the [MIT] (http://choosealicense.com/licenses/mit/) license.  
 
@@ -13,7 +13,7 @@ If you'd like to contribute to this project, please make a pull request. We'll r
 Software source code previously released under an open source license and then modified by NGA staff is considered a "joint work" (see 17 USC § 101); it is partially copyrighted, partially public domain, and as a whole is protected by the copyrights of the non-government authors and must be released according to the terms of the original open source license.
  
 ###In the News###
-NGA Director Letitia Long talks about NGA's GitHub initiative and our first offerings, GeoQ and Geo-Events, at the GEOINT Symposium.  Her comments start at 40 minutes and 40 seconds in the [video clip] (http://geointv.com/archive/geoint-2013-keynote-letitia-a-long/).
+NGA Director Letitia Long talks about NGA's GitHub initiative and our first offerings, GeoQ and GeoEvents, at the GEOINT Symposium.  Her comments start at 40 minutes and 40 seconds in the [video clip] (http://geointv.com/archive/geoint-2013-keynote-letitia-a-long/).
 
 
 ###This project realies heavily on open source packages and uses:###
